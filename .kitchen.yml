@@ -21,6 +21,7 @@ suites:
       'recipe[test-tools::default]',
       'recipe[mock-ec2::default]',
       'recipe[ec2dnsserver::default]',
+      'recipe[test-data::default]',
       'recipe[shinken::default]',
       'recipe[shinken::webui]',
       'recipe[shinken::broker]'

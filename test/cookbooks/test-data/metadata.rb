@@ -1,0 +1,6 @@
+name 'test-data'
+maintainer 'Evertrue, Inc.'
+maintainer_email 'devops@evertrue.com'
+license 'Apache 2.0'
+description 'test-data'
+version '1.0.1'
