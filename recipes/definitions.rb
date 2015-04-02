@@ -98,7 +98,7 @@ if Dir.exist?('/etc/shinken/hosts')
     e.sub(/\.cfg/, '')
   end
 
-  deleted_hosts_list = current_hosts_list - active_hosts_list
+  deleted_hosts_list = current_hosts_list - active_hosts_list.map(&:name)
 
   deleted_hosts_list.each do |h|
     file "/etc/shinken/hosts/#{h}.cfg" do
