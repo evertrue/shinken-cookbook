@@ -1,3 +1,9 @@
+# 1.2.0
+
+* Delete hosts and hostgroups if they no longer exist in the environment
+* Replace references to /etc/shinken with an attribute
+* Switch to rspec3 test syntax
+
 # 1.1.2
 
 * Add attribute for shinken agent user
