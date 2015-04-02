@@ -1,13 +1,12 @@
-source 'https://api.berkshelf.com'
+source 'https://supermarket.chef.io'
+source 'https://berks.evertrue.com'
 
 metadata
 
 group :integration do
   cookbook 'mock-ec2', path: './test/cookbooks/mock-ec2'
   cookbook 'test-tools', path: './test/cookbooks/test-tools'
-  cookbook 'et_hostname',
-           github: 'evertrue/et_hostname-cookbook'
-  cookbook 'ec2dnsserver',
-           github: 'evertrue/ec2dnsserver-cookbook',
-           tag: 'v2.1.0'
+  cookbook 'test-data', path: './test/cookbooks/test-data'
+  cookbook 'et_hostname'
+  cookbook 'ec2dnsserver'
 end
