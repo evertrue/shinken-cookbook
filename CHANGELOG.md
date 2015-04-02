@@ -1,3 +1,7 @@
+# 1.2.1
+
+* Forgot super-important "map" method call
+
 # 1.2.0
 
 * Delete hosts and hostgroups if they no longer exist in the environment
