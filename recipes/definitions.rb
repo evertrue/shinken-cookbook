@@ -88,10 +88,27 @@ node['shinken']['commands'].each do |cmd_name, cmd_conf|
   end
 end
 
-search(
+active_hosts_list = search(
   :node,
   node['shinken']['host_search_query']
-).each do |n|
+)
+
+if Dir.exist?('/etc/shinken/hosts')
+  current_hosts_list = (Dir.entries('/etc/shinken/hosts') - ['.', '..']).map do |e|
+    e.sub(/\.cfg/, '')
+  end
+
+  deleted_hosts_list = current_hosts_list - active_hosts_list
+
+  deleted_hosts_list.each do |h|
+    file "/etc/shinken/hosts/#{h}.cfg" do
+      action :delete
+      notifies :restart, 'service[shinken-arbiter]'
+    end
+  end
+end
+
+active_hosts_list.each do |n|
   host_conf = {
     'host_name' => n.name,
     'alias' => n.name,
@@ -108,6 +125,22 @@ search(
       conf: host_conf.merge(node['shinken']['host_defaults'])
     )
     notifies :restart, 'service[shinken-arbiter]'
+  end
+end
+
+if Dir.exist?('/etc/shinken/hostgroups')
+  active_hostgroups_list = node['shinken']['hostgroups'].keys + ['linux']
+  current_hostgroups_list = (Dir.entries('/etc/shinken/hostgroups') - ['.', '..']).map do |e|
+    e.sub(/\.cfg/, '')
+  end
+
+  deleted_hostgroups_list = current_hostgroups_list - active_hostgroups_list
+
+  deleted_hostgroups_list.each do |hg|
+    file "/etc/shinken/hostgroups/#{hg}.cfg" do
+      action :delete
+      notifies :restart, 'service[shinken-arbiter]'
+    end
   end
 end
 
