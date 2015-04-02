@@ -11,7 +11,7 @@ if credentials['shinken']
     fail "Missing credentials for #{contact['id']} in data_bag_item[" \
       "#{node['shinken']['webui']['credentials_data_bag']}::" \
       "#{node['shinken']['webui']['credentials_data_bag_item']}]" unless credentials['shinken'][contact['id']]
-    template "/etc/shinken/contacts/#{contact['id']}.cfg" do
+    template "#{node['shinken']['conf_dir']}/contacts/#{contact['id']}.cfg" do
       source 'generic-contact.cfg.erb'
       owner  node['shinken']['user']
       group  node['shinken']['group']
@@ -24,7 +24,7 @@ if credentials['shinken']
     end
   end
 
-  template '/etc/shinken/contactgroups/admins.cfg' do
+  template "#{node['shinken']['conf_dir']}/contactgroups/admins.cfg" do
     source 'generic-contactgroups.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']
@@ -37,7 +37,7 @@ if credentials['shinken']
     notifies :restart, 'service[shinken]'
   end
 
-  template '/etc/shinken/contactgroups/users.cfg' do
+  template "#{node['shinken']['conf_dir']}/contactgroups/users.cfg" do
     source 'generic-contactgroups.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']
@@ -55,13 +55,13 @@ end
 
 node['shinken']['services'].each do |svc_name, svc_conf|
   if svc_conf['hostgroup_name'] &&
-    !node['shinken']['hostgroups'][svc_conf['hostgroup_name']]
+     !node['shinken']['hostgroups'][svc_conf['hostgroup_name']]
     fail "Service #{svc_name} refers to hostgroup " \
       "#{svc_conf['hostgroup_name']} but that hostgroup does not seem to " \
       'exist.'
   end
 
-  template "/etc/shinken/services/#{svc_name}.cfg" do
+  template "#{node['shinken']['conf_dir']}/services/#{svc_name}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']
@@ -75,7 +75,7 @@ node['shinken']['services'].each do |svc_name, svc_conf|
 end
 
 node['shinken']['commands'].each do |cmd_name, cmd_conf|
-  template "/etc/shinken/commands/#{cmd_name}.cfg" do
+  template "#{node['shinken']['conf_dir']}/commands/#{cmd_name}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']
@@ -98,7 +98,7 @@ search(
     'address' => n['fqdn']
   }
 
-  template "/etc/shinken/hosts/#{n.name}.cfg" do
+  template "#{node['shinken']['conf_dir']}/hosts/#{n.name}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']
@@ -126,7 +126,7 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
     fail "Hostgroup #{hg_name} must contain either `search_str` or `members`."
   end
 
-  template "/etc/shinken/hostgroups/#{hg_name}.cfg" do
+  template "#{node['shinken']['conf_dir']}/hostgroups/#{hg_name}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
     group  node['shinken']['group']

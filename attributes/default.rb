@@ -1,6 +1,7 @@
 default['shinken']['user'] = 'shinken'
 default['shinken']['group'] = 'shinken'
 default['shinken']['home'] = '/var/lib/shinken'
+default['shinken']['conf_dir'] = '/etc/shinken'
 default['shinken']['install_type'] = 'package'
 default['shinken']['source_url'] =
   'https://github.com/naparuba/shinken/archive/' \
