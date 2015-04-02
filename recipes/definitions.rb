@@ -119,7 +119,7 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
     conf['members'] = search(
       :node,
       "chef_environment:#{node.chef_environment} AND " + hg_conf['search_str']
-    ).map { |n| n.name }.join(',')
+    ).map(&:name).join(',')
   elsif hg_conf['members']
     conf['members'] = hg_conf['members'].join(',')
   else
