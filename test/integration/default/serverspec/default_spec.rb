@@ -23,6 +23,14 @@ describe 'Shinken Config' do
     its(:content) { should match(/address test-dns\.local/) }
   end
 
+  context file('/etc/shinken/hosts/host-to-delete.cfg') do
+    it { is_expected.to_not be_file }
+  end
+
+  context file('/etc/shinken/hostgroups/hostgroup-to-delete.cfg') do
+    it { is_expected.to_not be_file }
+  end
+
   context file('/etc/shinken/contacts/testuser.cfg') do
     it { should be_file }
     it { should be_mode 600 }
