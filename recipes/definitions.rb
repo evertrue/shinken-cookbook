@@ -137,5 +137,4 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
     )
     notifies :restart, 'service[shinken-arbiter]'
   end
-  
 end
