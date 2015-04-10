@@ -1,9 +1,9 @@
 default['shinken']['webui'] = {
   'source_url' =>
     'https://github.com/shinken-monitoring/mod-webui/archive/' \
-      'dab8e74414cc1200cb79a1d3987cce405ff94f9e.zip',
+      'f074f1a247239c66ab2b0f0cfc8fa529d44be289.zip',
   'source_checksum' =>
-    '77714c3464f96f04cee0905a86b666739d267bd48ba8452743a8f3469132789a',
+    '9a7ea588a6327654850fd44640b26fe61ddfd1cea6873b2b88e830d6342ce5b6',
   'credentials_data_bag' => 'secrets',
   'credentials_data_bag_item' => 'monitoring',
   'port' => '7767',
