@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v1.3.0
+
+* Update source-based install URLs to point to more recent copies of Shinken & its Web UI
+* Add install of cherrypy library as per Shinken’s `pip install` instruction
+
 ## v1.2.1
 
 * Forgot super-important "map" method call
