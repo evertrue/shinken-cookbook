@@ -10,6 +10,11 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+#  - name: ub-14.04-amd64
+#    driver:
+#      box: ub-14.04-amd64
+#      box_url: https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+
 
 suites:
   - name: default
