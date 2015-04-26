@@ -10,6 +10,11 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+#  - name: ub-14.04-amd64
+#    driver:
+#      box: ub-14.04-amd64
+#      box_url: https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+
 
 suites:
   - name: default
@@ -17,12 +22,12 @@ suites:
       network:
       - [ 'private_network', {ip: '192.168.33.11'}]
     run_list: [
+      'recipe[shinken::default]',
       'recipe[et_hostname::default]',
       'recipe[test-tools::default]',
       'recipe[mock-ec2::default]',
       'recipe[ec2dnsserver::default]',
       'recipe[test-data::default]',
-      'recipe[shinken::default]',
       'recipe[shinken::webui]',
       'recipe[shinken::broker]'
     ]

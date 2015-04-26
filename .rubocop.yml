@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - 'berks-cookbooks/**/*'
+
+Metrics/LineLength:
+  Max: 120
+
+Style/Encoding:
+  Enabled: false
