@@ -13,9 +13,9 @@ if credentials['shinken']
       "#{node['shinken']['webui']['credentials_data_bag_item']}]" unless credentials['shinken'][contact['id']]
     template "#{node['shinken']['conf_dir']}/contacts/#{contact['id']}.cfg" do
       source 'generic-contact.cfg.erb'
-      owner  node['shinken']['user']
-      group  node['shinken']['group']
-      mode   0600
+      owner node['shinken']['user']
+      group node['shinken']['group']
+      mode 0600
       variables(
         contact: contact,
         password: credentials['shinken'][contact['id']]
@@ -26,9 +26,9 @@ if credentials['shinken']
 
   template "#{node['shinken']['conf_dir']}/contactgroups/admins.cfg" do
     source 'generic-contactgroups.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       cg_name: 'admins',
       cg_alias: 'admins',
@@ -39,9 +39,9 @@ if credentials['shinken']
 
   template "#{node['shinken']['conf_dir']}/contactgroups/users.cfg" do
     source 'generic-contactgroups.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       cg_name: 'users',
       cg_alias: 'users',
@@ -63,9 +63,9 @@ node['shinken']['services'].each do |svc_name, svc_conf|
 
   template "#{node['shinken']['conf_dir']}/services/#{svc_name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       type: 'service',
       conf: svc_conf.merge(node['shinken']['service_defaults'])
@@ -77,9 +77,9 @@ end
 node['shinken']['commands'].each do |cmd_name, cmd_conf|
   template "#{node['shinken']['conf_dir']}/commands/#{cmd_name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       type: 'command',
       conf: cmd_conf
@@ -117,9 +117,9 @@ active_hosts_list.each do |n|
 
   template "#{node['shinken']['conf_dir']}/hosts/#{n.name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       type: 'host',
       conf: host_conf.merge(node['shinken']['host_defaults'])
@@ -161,9 +161,9 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
 
   template "#{node['shinken']['conf_dir']}/hostgroups/#{hg_name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
-    mode   0644
+    owner node['shinken']['user']
+    group node['shinken']['group']
+    mode 0644
     variables(
       type: 'hostgroup',
       conf: hg_conf['conf'].merge(conf)

@@ -38,7 +38,7 @@ if node['platform_family'] == 'debian'
       command 'dpkg-statoverride --update --add root ' \
         "#{node['shinken']['group']} 4750 /usr/lib/nagios/plugins/#{plugin}"
       not_if "test -u /usr/lib/nagios/plugins/#{plugin}"
-      action  :run
+      action :run
     end
   end
 end
@@ -66,6 +66,5 @@ execute 'shinken-init' do
   user node['shinken']['user']
   environment('HOME' => node['shinken']['home'])
   creates "#{node['shinken']['home']}/.shinken.ini"
-  action  :run
+  action :run
 end
-
