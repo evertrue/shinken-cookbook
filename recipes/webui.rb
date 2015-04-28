@@ -8,9 +8,9 @@ if node['shinken']['install_type'] == 'source'
   end
 end
 
-execute "install-webui" do
+execute 'install-webui' do
   if node['shinken']['install_type'] == 'source'
-    command "/usr/bin/shinken install --local " \
+    command '/usr/bin/shinken install --local ' \
       "#{Chef::Config[:file_cache_path]}/mod-webui"
   else
     command '/usr/bin/shinken install webui'

@@ -68,4 +68,3 @@ execute 'shinken-init' do
   creates "#{node['shinken']['home']}/.shinken.ini"
   action  :run
 end
-
