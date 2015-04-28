@@ -1,11 +1,10 @@
-if node['shinken']['install_type'] == 'source'
-  ark 'mod-webui' do
-    url node['shinken']['webui']['source_url']
-    checksum node['shinken']['webui']['source_checksum']
-    path Chef::Config[:file_cache_path]
-    action :put
-    notifies :run, 'execute[install-webui]'
-  end
+ark 'mod-webui' do
+  url node['shinken']['webui']['source_url']
+  checksum node['shinken']['webui']['source_checksum']
+  path Chef::Config[:file_cache_path]
+  action :put
+  notifies :run, 'execute[install-webui]'
+  only_if { node['shinken']['install_type'] == 'source' }
 end
 
 execute 'install-webui' do
