@@ -140,4 +140,4 @@ include_recipe 'shinken::broker'
 
 ## License and Authors
 
-Author:: EverTrue, Inc. (<eric.herot@evertrue.com>)
+Author:: EverTrue, Inc. (<devops@evertrue.com>)
