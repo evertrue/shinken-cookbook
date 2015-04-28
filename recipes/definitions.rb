@@ -1,3 +1,7 @@
+if Chef::Config[:solo]
+  Chef::Log.warn 'This recipe uses search. Chef Solo does not support search.'
+end
+
 credentials =
   Chef::EncryptedDataBagItem.load(
     node['shinken']['webui']['credentials_data_bag'],
