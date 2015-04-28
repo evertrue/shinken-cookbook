@@ -1,6 +1,6 @@
 {
-  "name": "stage",
-  "description": "The staging environment",
+  "name": "test",
+  "description": "The test environment",
   "json_class": "Chef::Environment",
   "chef_type": "environment",
   "default_attributes": {
@@ -16,7 +16,7 @@
         }
       },
       "services": {
-        "stage-dns": {
+        "test-dns": {
           "hostgroup_name": "dns-servers",
           "service_description": "DNS Service Check",
           "check_command": "check_dig!test-dns.local",

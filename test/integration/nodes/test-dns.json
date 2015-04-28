@@ -1,6 +1,6 @@
 {
   "name": "test-dns",
-  "chef_environment": "stage",
+  "chef_environment": "test",
   "automatic": {
     "fqdn": "test-dns.local",
     "ipaddress": "192.168.33.11",
