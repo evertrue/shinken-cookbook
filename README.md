@@ -1,4 +1,5 @@
-![Shinken Logo](http://www.shinken-monitoring.org/fichiers/img/logo.png)
+![Shinken Logo](http://www.shinken-monitoring.org/img/LogoFrameworkBlack.png)
+
 # shinken-cookbook
 
 Set up the [Shinken Monitor Server](http://www.shinken-monitoring.org/) and its built in Web UI module.
