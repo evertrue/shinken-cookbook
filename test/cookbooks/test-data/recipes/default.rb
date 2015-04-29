@@ -1,5 +1,10 @@
-directory '/etc/shinken/hosts' do
-  recursive true
+%w(
+  hosts
+  hostgroups
+).each do |d|
+  directory "/etc/shinken/#{d}" do
+    recursive true
+  end
 end
 
 file '/etc/shinken/hosts/host-to-delete.cfg'
