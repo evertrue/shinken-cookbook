@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v1.4.0
+
+* Add RuboCop config (#3)
+* Fix convergence by removing nonexistent user from test-data cookbook (#3)
+* Clean up unused files
+* Clean up README
+* Add Rakefile with test tasks
+* Fix up some Foodcritic violations
+* Fix up some RuboCop violations
+* Add integration testing on Ubuntu 14.04
+* Other misc. fixes to configs
+
 ## v1.3.0
 
 * Update source-based install URLs to point to more recent copies of Shinken & its Web UI
