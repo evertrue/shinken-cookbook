@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 1.5.0
+
+* Move different definition types into their own recipies
+* Update install sources and associated checksums
+* Delete old services and hostgroups
+
 ## v1.4.0
 
 * Add RuboCop config (#3)
