@@ -31,6 +31,10 @@ describe 'Shinken Config' do
     it { is_expected.to_not be_file }
   end
 
+  context file('/etc/shinken/services/service-to-delete.cfg') do
+    it { is_expected.to_not be_file }
+  end
+
   context file('/etc/shinken/contacts/testuser.cfg') do
     it { should be_file }
     it { should be_mode 600 }
