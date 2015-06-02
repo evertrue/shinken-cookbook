@@ -10,7 +10,7 @@ file "#{node['shinken']['home']}/.ssh/id_rsa" do
   group  node['shinken']['group']
   mode   0600
   content(
-    Chef::EncryptedDataBagItem.load(
+    data_bag_item(
       node['shinken']['agent_key_data_bag'],
       node['shinken']['agent_key_data_bag_item']
     )['shinken']['agent_key']
