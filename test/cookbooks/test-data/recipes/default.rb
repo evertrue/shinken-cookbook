@@ -1,9 +1,10 @@
 user 'shinken'
 group 'shinken'
 
-%w(/etc/shinken/hosts
-   /etc/shinken/hostgroups).each do |dir|
-  directory dir do
+%w(hosts
+   hostgroups
+   services).each do |dir|
+  directory "/etc/shinken/#{dir}" do
     owner     'shinken'
     group     'shinken'
     mode      0755
@@ -12,16 +13,14 @@ group 'shinken'
   end
 end
 
-file '/etc/shinken/hosts/host-to-delete.cfg' do
-  action :create
-  owner  'shinken'
-  group  'shinken'
-  mode   0644
-end
-
-file '/etc/shinken/hostgroups/hostgroup-to-delete.cfg' do
-  action :create
-  owner  'shinken'
-  group  'shinken'
-  mode   0644
+%w(hosts/host-to-delete
+   hostgroups/hostgroup-to-delete
+   services/service-to-delete).each do |f|
+  file f do
+    path "/etc/shinken/#{f}.cfg"
+    action :create
+    owner 'shinken'
+    group 'shinken'
+    mode 0644
+  end
 end
