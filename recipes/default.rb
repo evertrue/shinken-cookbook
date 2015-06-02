@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+if Chef::Config[:solo]
+  Chef::Log.warn 'This recipe uses search. Chef Solo does not support search.'
+end
+
 user node['shinken']['user'] do
   home node['shinken']['home']
   shell '/bin/bash'
