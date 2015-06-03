@@ -77,7 +77,7 @@ The following will be parsed into their respective resource definition as such:
       "shinken": {
         "hostgroups": {
           "my-hostgroup": {
-            "search_str": "recipes:important-recipe\\:\\:default"
+            "search_str": "recipes:important-recipe\\:\\:default",
             "conf": {
               "alias": "My HostGroup"
             }
@@ -97,7 +97,7 @@ The following will be parsed into their respective resource definition as such:
             "members": [
               "server-1",
               "server-2"
-            ]
+            ],
             "conf": {
               "alias": "My HostGroup"
             }
