@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.6.0
+
+* Bump shinken package version to 2.4 and update webui package
+
 # 1.5.0
 
 * Move different definition types into their own recipies
