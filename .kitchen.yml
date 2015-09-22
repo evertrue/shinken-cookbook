@@ -16,24 +16,23 @@ suites:
   - name: default
     driver_config:
       network:
-      - - private_network
-        - ip: '192.168.33.11'
-    run_list: [
-      'recipe[et_hostname::default]',
-      'recipe[test-tools::default]',
-      'recipe[mock-ec2::default]',
-      'recipe[ec2dnsserver::default]',
-      'recipe[test-data::default]',
-      'recipe[shinken::default]',
-      'recipe[shinken::webui]',
-      'recipe[shinken::broker]'
-    ]
+        - - private_network
+          - ip: '192.168.33.11'
+    run_list:
+      - recipe[et_hostname::default]
+      - recipe[test-tools::default]
+      - recipe[mock-ec2::default]
+      - recipe[ec2dnsserver::default]
+      - recipe[test-data::default]
+      - recipe[shinken::default]
+      - recipe[shinken::webui]
+      - recipe[shinken::broker]
     attributes:
       shinken:
         install_type: source
       et_hostname:
         addl_hosts_entries:
-        - '192.168.33.11 test-dns.local'
+          - '192.168.33.11 test-dns.local'
       ec2:
         mac: '00:00:00:00:00:00'
         network_interfaces_macs:
