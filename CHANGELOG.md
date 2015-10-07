@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 1.6.1
+
+* Attributize `_hostgroups` search (#4)
+* Clean up Test Kitchen config
+* Consistently use user/group attributes
+* Update `ec2dnsserver` to bring in bugfix
+
 # 1.6.0
 
 * Bump shinken package version to 2.4 and update webui package
