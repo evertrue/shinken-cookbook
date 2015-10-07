@@ -7,5 +7,5 @@ group :integration do
   cookbook 'test-tools', path: './test/cookbooks/test-tools'
   cookbook 'test-data', path: './test/cookbooks/test-data'
   cookbook 'et_hostname', '~> 1.1'
-  cookbook 'ec2dnsserver', github: 'evertrue/ec2dnsserver-cookbook', tag: 'v2.1.2'
+  cookbook 'ec2dnsserver', github: 'evertrue/ec2dnsserver-cookbook', tag: 'v2.1.3'
 end
