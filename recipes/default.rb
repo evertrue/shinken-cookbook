@@ -52,6 +52,14 @@ include_recipe 'shinken::keys'
 include_recipe 'shinken::_users'
 include_recipe 'shinken::definitions'
 
+execute 'shinken-init' do
+  command 'shinken --init'
+  user node['shinken']['user']
+  environment('HOME' => node['shinken']['home'])
+  creates "#{node['shinken']['home']}/.shinken.ini"
+  action  :run
+end
+
 %w(
   shinken
   shinken-arbiter
@@ -64,12 +72,4 @@ include_recipe 'shinken::definitions'
   service svc do
     action [:enable, :start]
   end
-end
-
-execute 'shinken-init' do
-  command 'shinken --init'
-  user node['shinken']['user']
-  environment('HOME' => node['shinken']['home'])
-  creates "#{node['shinken']['home']}/.shinken.ini"
-  action  :run
 end
