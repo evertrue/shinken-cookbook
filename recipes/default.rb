@@ -30,7 +30,7 @@ include_recipe 'apt' if node['platform_family'] == 'debian'
 include_recipe 'python'
 
 package 'libcurl4-openssl-dev'
-package 'nagios-plugins'
+include_recipe 'shinken::plugins'
 
 if node['platform_family'] == 'debian'
   # Some plugins (such as check_icmp) need to be run as root.  This sets their
