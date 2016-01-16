@@ -17,12 +17,7 @@ package 'ruby2.2'
 %w(unirest trollop).each { |gem_name| gem_package gem_name }
 
 # Our plugins
-%w(
-  check_mesos_cpu
-  check_mesos_mem
-).each do |plugin|
-  cookbook_file "#{node['shinken']['nagios_home']}/plugins/#{plugin}" do
-    source "plugins/#{plugin}"
-    mode   0755
-  end
+cookbook_file "#{node['shinken']['nagios_home']}/plugins/check_mesos_resource" do
+  source 'plugins/check_mesos_resource'
+  mode   0755
 end
