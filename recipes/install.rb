@@ -18,7 +18,6 @@
 #
 
 include_recipe "shinken::#{node['shinken']['install_type']}"
-include_recipe 'build-essential'
 
 python_pip 'pycurl'
 

@@ -2,16 +2,19 @@
 
 package 'nagios-plugins' # Package plugins
 
-include_recipe 'ruby_build'
-include_recipe 'ruby_rbenv' # Needed to run our plugins
+include_recipe 'apt'
 
-node['rbenv']['rubies'].each do |ver|
-  rbenv_ruby ver
+apt_repository 'brightbox-ruby' do
+  uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
+  distribution node['lsb']['codename']
+  components %w(main)
+  keyserver 'keyserver.ubuntu.com'
+  key 'C3173AA6'
 end
 
-rbenv_global node['rbenv']['rubies'].first
+package 'ruby2.2'
 
-%w(unirest trollop).each { |gem_name| rbenv_gem gem_name }
+%w(unirest trollop).each { |gem_name| gem_package gem_name }
 
 # Our plugins
 %w(
