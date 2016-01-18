@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.7.0
+
+* Add Mesos CPU/Memory check
+* Run shinken-init before setting up services
+
 # 1.6.1
 
 * Attributize `_hostgroups` search (#4)
