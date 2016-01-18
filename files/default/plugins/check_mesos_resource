@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'unirest'
+require 'trollop'
+
+module ShinkenPlugins
+  class CheckMesosResource
+    def run
+      pm = portion_resource
+      print("MESOS #{opts[:resource].upcase} ")
+      if pm > opts[:threshold].to_f
+        printf("CRITICAL: %.2f/1.00\n", pm)
+        exit 1
+      end
+      printf("OK: %.2f/1.00\n", pm)
+      exit 0
+    end
+
+    def used
+      response['slaves'].map { |s| s['used_resources'][opts[:resource]] }.inject(:+).to_f
+    end
+
+    def total
+      response['slaves'].map { |s| s['resources'][opts[:resource]] }.inject(:+).to_f
+    end
+
+    def portion_resource
+      used / total
+    end
+
+    private
+
+    def response
+      @response ||=
+        Unirest.get("http://#{opts[:hostname]}:#{opts[:port]}/master/state.json").body
+    end
+
+    def opts
+      @opts ||= Trollop.options do
+        opt :hostname,
+            'Mesos host to check',
+            short: '-I',
+            required: true,
+            type: :string
+        opt :threshold,
+            'Threshold above which to return an error',
+            short: '-t',
+            default: 0.8
+        opt :resource,
+            'Metric to check (e.g. cpus, mem)',
+            short: '-m',
+            required: true,
+            type: :string
+        opt :port,
+            'Mesos management port',
+            short: '-p',
+            default: '5050'
+      end
+    end
+  end
+end
+
+ShinkenPlugins::CheckMesosResource.new.run

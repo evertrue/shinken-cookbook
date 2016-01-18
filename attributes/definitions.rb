@@ -27,6 +27,16 @@ default['shinken']['commands'] = {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
       '--onredirect=follow --port=$ARG1$ --url=$ARG2$ --regex=$ARG3$'
   },
+  'check_mesos_cpus' => {
+    'command_name' => 'check_mesos_cpus',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_mesos_resource ' \
+      '-I $HOSTADDRESS$ -m cpus -t $ARG1$'
+  },
+  'check_mesos_mem' => {
+    'command_name' => 'check_mesos_mem',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_mesos_resource ' \
+      '-I $HOSTADDRESS$ -m mem -t $ARG1$'
+  },
   'check_reboot_required' => {
     'command_name' => 'check_reboot_required',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
