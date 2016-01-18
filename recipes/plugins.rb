@@ -1,8 +1,8 @@
 # Installs Nagios plugins
 
-package 'nagios-plugins' # Package plugins
-
 include_recipe 'apt'
+
+package 'nagios-plugins' # Package plugins
 
 apt_repository 'brightbox-ruby' do
   uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
