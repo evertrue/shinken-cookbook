@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+require 'snmp'
+require 'trollop'
+
+class CriticalStateException < StandardError; end
+
+class CheckInodesSnmp
+  def run
+    if opts[:device]
+      raise ArgumentError, "Device #{opts[:device]} not found" unless stats[opts[:device]]
+      print 'INODES '
+      if stats[opts[:device]] >= opts[:threshold]
+        puts "CRITICAL: #{opts[:device]} #{stats[opts[:device]]}/100\n"
+        raise CriticalStateException
+      else
+        print "OK: #{opts[:device]} #{stats[opts[:device]]}/100\n"
+      end
+    else
+      critical_devices = stats.select { |k, v| v >= opts[:threshold] }
+      if critical_devices.empty?
+        puts 'INODES OK'
+      else
+        print 'INODES CRITICAL:'
+        critical_devices.each { |dev, val| print " #{dev} #{val}/100;" }
+        puts
+        raise CriticalStateException
+      end
+    end
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :hostname,
+          'Host to check',
+          short: '-I',
+          required: true,
+          type: :string
+      opt :threshold,
+          'Threshold (percentage) above which to return an error',
+          short: '-t',
+          default: 80
+      opt :device,
+          'Device to check (default is to check everything)',
+          short: '-d',
+          type: :string
+    end
+  end
+
+  def params
+    {
+      host: opts[:hostname],
+      mib_modules: %w(UCD-SNMP-MIB)
+    }
+  end
+
+  def stats
+    @stats ||= begin
+      columns = %w(dskPath dskPercentNode)
+      collector = {}
+      SNMP::Manager.open(params) do |manager|
+        manager.walk(columns) { |row| collector[row[0].value] = row[1].value.to_i }
+      end
+      collector
+    end
+  end
+end
+
+begin
+  CheckInodesSnmp.new.run
+rescue CriticalStateException
+  exit 2
+rescue => e
+  puts e.message
+  exit 3
+end

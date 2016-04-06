@@ -14,10 +14,15 @@ end
 
 package 'ruby2.2'
 
-%w(unirest trollop).each { |gem_name| gem_package gem_name }
+%w(unirest trollop snmp).each { |gem_name| gem_package gem_name }
 
 # Our plugins
-cookbook_file "#{node['shinken']['nagios_home']}/plugins/check_mesos_resource" do
-  source 'plugins/check_mesos_resource'
-  mode   0755
+%w(
+  check_inodes_snmp
+  check_mesos_resource
+).each do |plugin|
+  cookbook_file "#{node['shinken']['nagios_home']}/plugins/#{plugin}" do
+    source "plugins/#{plugin}"
+    mode   0755
+  end
 end
