@@ -40,6 +40,10 @@ describe 'Shinken Config' do
     it { should be_mode 600 }
     its(:content) { should match(/email testuser@local/) }
   end
+
+  describe file('/etc/shinken/commands/check_inodes.cfg') do
+    it { is_expected.to be_file }
+  end
 end
 
 describe 'Nagios Plugin Setup' do
@@ -48,6 +52,20 @@ describe 'Nagios Plugin Setup' do
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'shinken' }
     it { should be_executable.by_user 'shinken' }
+  end
+
+  context 'Too situation CRITICAL' do
+    describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost -t 1') do
+      its(:stdout) { is_expected.to match(/^INODES CRITICAL: \/ \d{1,2}\/100;\n/) }
+      its(:exit_status) { should eq 2 }
+    end
+  end
+
+  context 'Inode situation OK' do
+    describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost') do
+      its(:stdout) { is_expected.to match(/^INODES OK\n/) }
+      its(:exit_status) { should eq 0 }
+    end
   end
 end
 
