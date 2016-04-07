@@ -27,6 +27,10 @@ default['shinken']['commands'] = {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
       '--onredirect=follow --port=$ARG1$ --url=$ARG2$ --regex=$ARG3$'
   },
+  'check_inodes' => {
+    'command_name' => 'check_inodes',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_inodes_snmp -I $HOSTADDRESS$'
+  },
   'check_mesos_cpus' => {
     'command_name' => 'check_mesos_cpus',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_mesos_resource ' \
