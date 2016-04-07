@@ -11,10 +11,10 @@ class CheckInodesSnmp
       raise ArgumentError, "Device #{opts[:device]} not found" unless stats[opts[:device]]
       print 'INODES '
       if stats[opts[:device]] >= opts[:threshold]
-        puts "CRITICAL: #{opts[:device]} #{stats[opts[:device]]}/100\n"
+        puts "CRITICAL: #{opts[:device]} #{stats[opts[:device]]}/100"
         raise CriticalStateException
       else
-        print "OK: #{opts[:device]} #{stats[opts[:device]]}/100\n"
+        puts "OK: #{opts[:device]} #{stats[opts[:device]]}/100"
       end
     else
       critical_devices = stats.select { |k, v| v >= opts[:threshold] }
