@@ -44,12 +44,17 @@ class CheckInodesSnmp
           'Device to check (default is to check everything)',
           short: '-d',
           type: :string
+      opt :community,
+          'Community string',
+          short: '-c',
+          default: 'public'
     end
   end
 
   def params
     {
       host: opts[:hostname],
+      community: opts[:community],
       mib_modules: %w(UCD-SNMP-MIB)
     }
   end

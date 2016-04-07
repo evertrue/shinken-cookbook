@@ -29,7 +29,8 @@ default['shinken']['commands'] = {
   },
   'check_inodes' => {
     'command_name' => 'check_inodes',
-    'command_line' => '$NAGIOSPLUGINSDIR$/check_inodes_snmp -I $HOSTADDRESS$'
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_inodes_snmp -I $HOSTADDRESS$ ' \
+      '--community $ARG1$'
   },
   'check_mesos_cpus' => {
     'command_name' => 'check_mesos_cpus',
