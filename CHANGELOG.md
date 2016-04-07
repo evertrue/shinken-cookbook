@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 1.8.0
+
+* Create a plugin to check for inode counts via snmp
+* Include nagios-snmp-plugins package of plugins
+* Test on real-life ec2
+
 # 1.7.0
 
 * Add Mesos CPU/Memory check
