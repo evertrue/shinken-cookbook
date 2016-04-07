@@ -2,7 +2,10 @@
 
 include_recipe 'apt'
 
-package 'nagios-plugins' # Package plugins
+%w(
+  nagios-plugins
+  nagios-snmp-plugins
+).each { |pkg| package pkg }
 
 apt_repository 'brightbox-ruby' do
   uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
