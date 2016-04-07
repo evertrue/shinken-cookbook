@@ -1,6 +1,18 @@
 ---
 driver:
-  name: vagrant
+  name: ec2
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
+  region: us-east-1
+  availability_zone: us-east-1b
+  security_group_ids:
+    - ci-testing
+  instance_type: c3.xlarge
+  tags:
+    Env: public
+    Type: test
+
+transport:
+  ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
 
 provisioner:
   name: chef_zero
@@ -10,6 +22,8 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
+    driver:
+      image_id: ami-7d7d7c17
 
 suites:
   - name: default
@@ -33,11 +47,6 @@ suites:
       et_hostname:
         addl_hosts_entries:
           - '192.168.33.11 test-dns.local'
-      ec2:
-        mac: '00:00:00:00:00:00'
-        network_interfaces_macs:
-          '00:00:00:00:00:00':
-            vpc_ipv4_cidr_block: 10.99.0.0/16
       ec2dnsserver:
         contact_email: 'hostmaster@yourdomain.local'
         recursion_clients:
