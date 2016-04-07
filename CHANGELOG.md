@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.8.1
+
+* Allow check_inodes_snmp script to take community as a parameter
+
 # 1.8.0
 
 * Create a plugin to check for inode counts via snmp
