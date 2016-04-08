@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.8.2
+
+* Don't check fake filesystems for inodes
+
 # 1.8.1
 
 * Allow check_inodes_snmp script to take community as a parameter
