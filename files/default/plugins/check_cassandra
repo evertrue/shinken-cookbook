@@ -12,11 +12,11 @@ class CheckCassandra
   end
 
   def status
-    @status ||= cluster.hosts.find{ |h| h.ip == Resolv.getaddress(opts[:hostname]) }.status
+    cluster.hosts.find{ |h| h.ip == Resolv.getaddress(opts[:hostname]) }.status
   end
 
   def cluster
-    @cluster ||= Cassandra.cluster hosts: [opts[:hostname]]
+    Cassandra.cluster hosts: [opts[:hostname]]
   end
 
   def opts
