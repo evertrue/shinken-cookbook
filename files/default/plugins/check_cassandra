@@ -7,8 +7,8 @@ require 'resolv'
 class CriticalStateException < StandardError; end
 
 class CheckCassandra
-  def run
-    raise CriticalStateException if status != :up
+  def self.check_node!
+    raise CriticalStateException unless CheckCassandra.new.status == :up
   end
 
   def status
@@ -31,7 +31,7 @@ class CheckCassandra
 end
 
 begin
-  CheckCassandra.new.run
+  CheckCassandra.check_node!
   puts 'CASSANDRA NODE OK'
 rescue CriticalStateException
   puts 'CASSANDRA NODE CRITICAL'
