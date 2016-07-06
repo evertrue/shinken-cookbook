@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.9.0
+
+* Add plugin: cassandra_check
+* Set an IAM profile so we can test with Fog
+
 # 1.8.2
 
 * Don't check fake filesystems for inodes
