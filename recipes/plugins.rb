@@ -16,6 +16,7 @@ apt_repository 'brightbox-ruby' do
 end
 
 package 'ruby2.2'
+package 'ruby2.2-dev'
 
 %w(
   unirest

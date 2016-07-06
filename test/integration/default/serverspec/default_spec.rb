@@ -47,24 +47,41 @@ describe 'Shinken Config' do
 end
 
 describe 'Nagios Plugin Setup' do
-  context file('/usr/lib/nagios/plugins/check_icmp') do
-    it { should be_mode 4750 }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'shinken' }
-    it { should be_executable.by_user 'shinken' }
-  end
+  describe 'check_icmp' do
+    context file('/usr/lib/nagios/plugins/check_icmp') do
+      it { should be_mode 4750 }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'shinken' }
+      it { should be_executable.by_user 'shinken' }
+    end
 
-  context 'Too situation CRITICAL' do
-    describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost -t 1') do
-      its(:stdout) { is_expected.to match(/^INODES CRITICAL: \/ \d{1,2}\/100;\n/) }
-      its(:exit_status) { should eq 2 }
+    context 'Inode situation CRITICAL' do
+      describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost -t 1') do
+        its(:stdout) { is_expected.to match(/^INODES CRITICAL: \/ \d{1,2}\/100;\n/) }
+        its(:exit_status) { should eq 2 }
+      end
+    end
+
+    context 'Inode situation OK' do
+      describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost') do
+        its(:stdout) { is_expected.to match(/^INODES OK\n/) }
+        its(:exit_status) { should eq 0 }
+      end
     end
   end
 
-  context 'Inode situation OK' do
-    describe command('/usr/lib/nagios/plugins/check_inodes_snmp -I localhost') do
-      its(:stdout) { is_expected.to match(/^INODES OK\n/) }
-      its(:exit_status) { should eq 0 }
+  describe 'check_cassandra' do
+    context file('/usr/lib/nagios/plugins/check_cassandra') do
+      it { should be_mode 755 }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+      it { should be_executable.by_user 'shinken' }
+    end
+  end
+
+  context 'Bogus hostname is supplied' do
+    describe command('/usr/lib/nagios/plugins/check_cassandra -I foobar') do
+      its(:exit_status) { should eq 3 }
     end
   end
 end
