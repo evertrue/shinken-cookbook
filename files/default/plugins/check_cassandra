@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require 'trollop'
+require 'cassandra'
+require 'resolv'
+
+class CriticalStateException < StandardError; end
+
+class CheckCassandra
+  def self.check_node!
+    raise CriticalStateException unless CheckCassandra.new.status == :up
+  end
+
+  def status
+    cluster.hosts.find{ |h| h.ip == Resolv.getaddress(opts[:hostname]) }.status
+  end
+
+  def cluster
+    Cassandra.cluster hosts: [opts[:hostname]]
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :hostname,
+          'Host to check',
+          short: '-I',
+          required: true,
+          type: :string
+    end
+  end
+end
+
+begin
+  CheckCassandra.check_node!
+  puts 'CASSANDRA NODE OK'
+rescue CriticalStateException
+  puts 'CASSANDRA NODE CRITICAL'
+  exit 2
+rescue Interrupt
+  puts 'Interrupt'
+  exit 3
+rescue Exception => e
+  puts "Error: #{e.message}"
+  puts e.backtrace.join("\n")
+  exit 3
+end

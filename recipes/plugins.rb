@@ -17,10 +17,16 @@ end
 
 package 'ruby2.2'
 
-%w(unirest trollop snmp).each { |gem_name| gem_package gem_name }
+%w(
+  unirest
+  trollop
+  snmp
+  cassandra-driver
+).each { |gem_name| gem_package gem_name }
 
 # Our plugins
 %w(
+  check_cassandra
   check_inodes_snmp
   check_mesos_resource
 ).each do |plugin|
