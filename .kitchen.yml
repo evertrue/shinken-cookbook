@@ -10,6 +10,7 @@ driver:
   tags:
     Env: public
     Type: test
+  iam_profile_name: test-ec2dnsserver
 
 transport:
   ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
