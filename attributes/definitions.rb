@@ -17,6 +17,10 @@ default['shinken']['host_defaults'] =
 default['shinken']['agent_user'] = 'shinkenagent'
 
 default['shinken']['commands'] = {
+  'check_cassandra' => {
+    'command_name' => 'check_cassandra',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_cassandra -I $HOSTADDRESS$'
+  },
   'check_http' => {
     'command_name' => 'check_http',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
