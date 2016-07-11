@@ -143,7 +143,8 @@ describe 'Event Handlers' do
     its(:stdout) { is_expected.to match('Options:
   -n, --description=<s>    Service Description
   -s, --state=<s>          Service State
+  -e, --env=<s>            Environment
   -h, --host=<s>           Host Name
-  -e, --help               Show this message') }
+  -l, --help               Show this message') }
   end
 end

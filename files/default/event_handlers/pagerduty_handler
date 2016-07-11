@@ -10,7 +10,7 @@ class PagerDutyNotificationHandler
 
   def notify
     pagerduty.trigger(
-      "Shinken monitored service #{opts[:description]} entered " \
+      "Shinken monitored service #{opts[:description]} (env: #{opts[:env].upcase}) entered " \
       "state #{opts[:state]}" + (opts[:host] ? " on host #{opts[:host]}" : ''),
       incident_key: incident_key
     )
@@ -23,7 +23,7 @@ class PagerDutyNotificationHandler
   private
 
   def incident_key
-    @incident_key ||= "shinken #{opts[:description]}" + (opts[:host] ? " #{opts[:host]}" : '')
+    @incident_key ||= "#{opts[:env]} shinken #{opts[:description]}" + (opts[:host] ? " #{opts[:host]}" : '')
   end
 
   def pagerduty
@@ -35,7 +35,8 @@ class PagerDutyNotificationHandler
     @opts ||= Trollop.options do
       opt :description, 'Service Description', short: 'n', type: :string, required: true
       opt :state,       'Service State',       short: 's', type: :string, required: true
-      opt :host,        'Host Name',       short: 'h', type: :string
+      opt :env,         'Environment',         short: 'e', type: :string, required: true
+      opt :host,        'Host Name',           short: 'h', type: :string
     end
   end
 end

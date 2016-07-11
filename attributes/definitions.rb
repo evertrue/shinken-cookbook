@@ -56,14 +56,16 @@ default['shinken']['commands'] = {
   },
   'notify_pagerduty_for_service' => {
     'command_name' => 'notify_pagerduty_for_service',
-    'command_line' => "#{['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
+    'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
       '--description="$SERVICEDESC$" ' \
+      "--env=#{node.chef_environment} " \
       '--state=$SERVICESTATE$'
   },
   'notify_pagerduty_for_host' => {
     'command_name' => 'notify_pagerduty_for_host',
-    'command_line' => "#{['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
+    'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
       '--description="$SERVICEDESC$" ' \
+      "--env=#{node.chef_environment} " \
       '--host=$HOSTNAME$ ' \
       '--state=$SERVICESTATE$'
   }
