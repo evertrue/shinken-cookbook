@@ -53,6 +53,19 @@ default['shinken']['commands'] = {
       "--logname=#{node['shinken']['agent_user']} " \
       '--command=\'test -f /var/run/reboot-required\' ' \
       "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
+  },
+  'notify_pagerduty_for_service' => {
+    'command_name' => 'notify_pagerduty_for_service',
+    'command_line' => "#{['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
+      '--description="$SERVICEDESC$" ' \
+      '--state=$SERVICESTATE$'
+  },
+  'notify_pagerduty_for_host' => {
+    'command_name' => 'notify_pagerduty_for_host',
+    'command_line' => "#{['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
+      '--description="$SERVICEDESC$" ' \
+      '--host=$HOSTNAME$ ' \
+      '--state=$SERVICESTATE$'
   }
 }
 

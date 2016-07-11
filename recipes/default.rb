@@ -50,6 +50,7 @@ end
 include_recipe 'shinken::install'
 include_recipe 'shinken::keys'
 include_recipe 'shinken::_users'
+include_recipe 'shinken::_handlers'
 include_recipe 'shinken::definitions'
 
 execute 'shinken-init' do

@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'trollop'
+require 'pagerduty'
+
+class PagerDutyNotificationHandler
+  def run
+    opts[:state] == 'OK' ? resolve : notify
+  end
+
+  def notify
+    pagerduty.trigger(
+      "Shinken monitored service #{opts[:description]} entered " \
+      "state #{opts[:state]}" + (opts[:host] ? " on host #{opts[:host]}" : ''),
+      incident_key: incident_key
+    )
+  end
+
+  def resolve
+    pagerduty.get_incident(incident_key).resolve
+  end
+
+  private
+
+  def incident_key
+    @incident_key ||= "shinken #{opts[:description]}" + (opts[:host] ? " #{opts[:host]}" : '')
+  end
+
+  def pagerduty
+    @pagerduty ||=
+      Pagerduty.new(ENV['PAGERDUTY_KEY'] || File.read('/etc/shinken/pagerduty.key').chomp)
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :description, 'Service Description', short: 'n', type: :string, required: true
+      opt :state,       'Service State',       short: 's', type: :string, required: true
+      opt :host,        'Host Name',       short: 'h', type: :string
+    end
+  end
+end
+
+PagerDutyNotificationHandler.new.run
