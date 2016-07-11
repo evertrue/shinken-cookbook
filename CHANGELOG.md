@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.10.0
+
+* Add a Pagerduty notification event handler
+
 # 1.9.0
 
 * Add plugin: cassandra_check
