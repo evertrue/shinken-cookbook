@@ -131,3 +131,19 @@ describe 'Shinken Web UI' do
     its(:stdout) { should match(/DNS Service Check/) }
   end
 end
+
+describe 'Event Handlers' do
+  describe file('/etc/shinken/pagerduty.key') do
+    it { is_expected.to be_file }
+    it { is_expected.to be_mode 600 }
+    its(:content) { is_expected.to_not eq '' }
+  end
+
+  describe command('/etc/shinken/notification-handlers/pagerduty_handler --help') do
+    its(:stdout) { is_expected.to match('Options:
+  -n, --description=<s>    Service Description
+  -s, --state=<s>          Service State
+  -h, --host=<s>           Host Name
+  -e, --help               Show this message') }
+  end
+end
