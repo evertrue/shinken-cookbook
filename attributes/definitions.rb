@@ -24,12 +24,23 @@ default['shinken']['commands'] = {
   'check_http' => {
     'command_name' => 'check_http',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
-      '--onredirect=follow --port=$ARG1$ --url=$ARG2$'
+      '-H $HOSTADDRESS$ --onredirect=follow --no-body --port=$ARG1$ --url=$ARG2$'
   },
   'check_http_content' => {
     'command_name' => 'check_http_content',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
-      '--onredirect=follow --port=$ARG1$ --url=$ARG2$ --regex=$ARG3$'
+      '-H $HOSTADDRESS$ --onredirect=follow --port=$ARG1$ --url=$ARG2$ --regex=$ARG3$'
+  },
+  'check_https' => {
+    'command_name' => 'check_https',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
+      '-H $HOSTADDRESS$ -S --onredirect=follow --no-body --port=$ARG1$ --url=$ARG2$'
+  },
+  'check_https_content' => {
+    'command_name' => 'check_https_content',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
+      '-H $HOSTADDRESS$ -S --onredirect=follow --port=$ARG1$ --url=$ARG2$ ' \
+      '--regex=$ARG3$'
   },
   'check_inodes' => {
     'command_name' => 'check_inodes',
