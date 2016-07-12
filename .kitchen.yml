@@ -47,6 +47,17 @@ suites:
       - recipe[shinken::broker]
     attributes:
       shinken:
+        hosts:
+          - host_name: stage-api
+            address: stage-api.evertrue.com
+            active_checks_enabled: 0
+            passive_checks_enabled: 0
+            flap_detection_enabled: 0
+        services:
+          auth:
+            host_name: stage-api
+            service_description: Auth API Stage
+            check_command: check_https!443!/auth/health
         install_type: source
       et_hostname:
         addl_hosts_entries:
