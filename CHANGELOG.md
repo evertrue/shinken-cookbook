@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.11.0
+
+* Add ability to check an API
+
 # 1.10.0
 
 * Add a Pagerduty notification event handler
