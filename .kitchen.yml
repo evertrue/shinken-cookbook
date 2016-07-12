@@ -5,10 +5,12 @@ driver:
   region: us-east-1
   availability_zone: us-east-1b
   security_group_ids:
-    - ci-testing
+    - sg-97e55ef2
   instance_type: c3.xlarge
+  interface: private
+  subnet_id: subnet-a792da8f
   tags:
-    Env: public
+    Env: private
     Type: test
   iam_profile_name: test-ec2dnsserver
 
