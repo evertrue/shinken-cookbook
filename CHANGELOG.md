@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.12.1
+
+* Add missing arguments to slack notifier command
+* Dramatically shorten the default check_interval from 60m to 5m
+
 # 1.12.0
 
 * Add a Slack notification event handler
