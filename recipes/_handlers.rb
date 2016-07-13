@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: shinken
-# Recipe:: _commands
+# Recipe:: _handlers
 #
 # Copyright (C) 2016 EverTrue, Inc.
 #
@@ -16,6 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+package 'ruby2.2'
+gem_package 'trollop'
+
+directory '/etc/shinken/notification-handlers' do
+  owner  'shinken'
+  group  'shinken'
+end
 
 include_recipe 'shinken::pagerduty_handler'
 include_recipe 'shinken::slack_handler'
