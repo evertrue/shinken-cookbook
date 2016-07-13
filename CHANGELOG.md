@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.12.2
+
+* check_cassandra: Fail with 2 on connection refused
+
 # 1.12.1
 
 * Add missing arguments to slack notifier command
