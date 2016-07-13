@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: shinken
-# Recipe:: _commands
+# Recipe:: slack_handler
 #
 # Copyright (C) 2016 EverTrue, Inc.
 #
@@ -17,5 +17,18 @@
 # limitations under the License.
 #
 
-include_recipe 'shinken::pagerduty_handler'
-include_recipe 'shinken::slack_handler'
+file '/etc/shinken/slack_webhook' do
+  content data_bag_item('secrets', 'api_keys')['slack_webhook_url']
+  owner  'shinken'
+  group  'shinken'
+  mode 0600
+end
+
+gem_package 'slack-notifier'
+
+cookbook_file '/etc/shinken/notification-handlers/slack_handler' do
+  source 'event_handlers/slack_handler'
+  owner  'shinken'
+  group  'shinken'
+  mode   0755
+end
