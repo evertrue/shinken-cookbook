@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.12.0
+
+* Add a Slack notification event handler
+* Don't fail if `node['shinken']['hosts']` not defined
+
 # 1.11.0
 
 * Add ability to check an API
