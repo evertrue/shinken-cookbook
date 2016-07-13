@@ -28,7 +28,7 @@ active_hosts_list = search(
   }
 end
 
-active_hosts_list += node['shinken']['hosts']
+active_hosts_list += node['shinken']['hosts'] || []
 
 if Dir.exist?("#{node['shinken']['conf_dir']}/hosts")
   current_hosts_list = (Dir.entries("#{node['shinken']['conf_dir']}/hosts") -
