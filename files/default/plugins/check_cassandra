@@ -17,6 +17,8 @@ class CheckCassandra
 
   def cluster
     Cassandra.cluster hosts: [opts[:hostname]]
+  rescue => e
+    raise CriticalStateException, e
   end
 
   def opts
@@ -33,8 +35,8 @@ end
 begin
   CheckCassandra.check_node!
   puts 'CASSANDRA NODE OK'
-rescue CriticalStateException
-  puts 'CASSANDRA NODE CRITICAL'
+rescue CriticalStateException => e
+  puts "CASSANDRA NODE CRITICAL - #{e.message}"
   exit 2
 rescue Interrupt
   puts 'Interrupt'
