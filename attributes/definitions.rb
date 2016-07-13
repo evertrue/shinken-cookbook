@@ -85,7 +85,10 @@ default['shinken']['commands'] = {
     'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/slack_handler " \
       '--description="$SERVICEDESC$" ' \
       "--env=#{node.chef_environment} " \
-      '--state=$SERVICESTATE$'
+      '--state=$SERVICESTATE$ ' \
+      '--output="$SERVICEOUTPUT$" ' \
+      '--channel=$ARG1$ ' \
+      '--url=$ARG2$'
   }
 }
 
