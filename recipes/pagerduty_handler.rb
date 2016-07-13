@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: shinken
-# Recipe:: _commands
+# Recipe:: pagerduty_handler
 #
 # Copyright (C) 2016 EverTrue, Inc.
 #
@@ -24,15 +24,7 @@ file '/etc/shinken/pagerduty.key' do
   mode 0600
 end
 
-package 'ruby2.2'
-
 gem_package 'pagerduty'
-gem_package 'trollop'
-
-directory '/etc/shinken/notification-handlers' do
-  owner  'shinken'
-  group  'shinken'
-end
 
 cookbook_file '/etc/shinken/notification-handlers/pagerduty_handler' do
   source 'event_handlers/pagerduty_handler'

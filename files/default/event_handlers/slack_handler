@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+
+require 'trollop'
+require 'slack-notifier'
+
+class SlackNotificationHandler
+  def run
+    opts[:state] == 'OK' ? resolve : notify
+  end
+
+  def formatted_attachment
+    msg = "\*Shinken Notification:\* Service \"#{opts[:description]}"
+    msg += " (Event ID: #{opts[:event_id]})" if opts[:event_id]
+    msg += "\n\n*Entered State:* #{opts[:state]}\n\n" \
+          "*Environment:* #{opts[:env].upcase}"
+
+    msg += "\n*Host:* #{opts[:host]}" if opts[:host]
+    msg += "\n*URL:* #{opts[:url]}" if opts[:url]
+    msg += "\n\n*Output:*\n\`\`\`\n#{opts[:output]}\n\`\`\`\n" if opts[:output]
+
+    attachment = {
+      mrkdwn: true,
+      fallback: msg,
+      text: msg,
+      mrkdwn_in: [:text]
+    }
+  end
+
+  def notify
+    slack.ping attachments: [formatted_attachment.merge({ color: 'danger' })]
+  end
+
+  def resolve
+    slack.ping attachments: [formatted_attachment.merge({ color: 'good' })]
+  end
+
+  private
+
+  def slack
+    @slack ||= begin
+      sl = Slack::Notifier.new(ENV['SLACK_WEBHOOK'] || File.read('/etc/shinken/slack_webhook').chomp)
+      sl.channel = opts[:channel]
+      sl.username = 'Shinken Notifier'
+      sl
+    end
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :channel,     'Slack Channel',       short: 'c', type: :string, required: true
+      opt :description, 'Service Description', short: 'd', type: :string, required: true
+      opt :state,       'Service State',       short: 's', type: :string, required: true
+      opt :url,         'Service URL',         short: 'u', type: :string
+      opt :output,      'Service Output',      short: 'o', type: :string
+      opt :env,         'Environment',         short: 'e', type: :string, required: true
+      opt :host,        'Host Name',           short: 'h', type: :string
+      opt :event_id,    'Shinken Event ID',    short: 'i', type: :string
+    end
+  end
+end
+
+SlackNotificationHandler.new.run
