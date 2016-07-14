@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.12.6
+
+* Always enable event_handler if one is specified
+
 # 1.12.5
 
 * Set default max_check_attempts to 1
