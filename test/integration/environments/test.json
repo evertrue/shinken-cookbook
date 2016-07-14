@@ -20,7 +20,8 @@
           "hostgroup_name": "dns-servers",
           "service_description": "DNS Service Check",
           "check_command": "check_dig!test-dns.local",
-          "contact_groups": "admins"
+          "contact_groups": "admins",
+          "check_interval": 6
         }
       }
     }
