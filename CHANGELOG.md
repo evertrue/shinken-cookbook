@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.13.0
+
+* Bump Shinken source install to 2.4.3
+* kitchen yaml: test host_defaults
+* Add notify_slack_for_host command
+* Oops: handler_enabled should be 1 not 0
+
 # 1.12.6
 
 * Always enable event_handler if one is specified
