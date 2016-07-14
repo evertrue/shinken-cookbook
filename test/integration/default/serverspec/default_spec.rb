@@ -81,7 +81,7 @@ describe 'Nagios Plugin Setup' do
 
   context 'Bogus hostname is supplied' do
     describe command('/usr/lib/nagios/plugins/check_cassandra -I foobar') do
-      its(:exit_status) { should eq 3 }
+      its(:exit_status) { should eq 2 }
     end
   end
 end
