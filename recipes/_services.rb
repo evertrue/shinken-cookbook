@@ -48,7 +48,7 @@ node['shinken']['services'].each do |svc_name, svc_conf|
     mode   0644
     variables(
       type: 'service',
-      conf: svc_conf.merge(node['shinken']['service_defaults'])
+      conf: node['shinken']['service_defaults'].merge(svc_conf)
     )
     notifies :restart, 'service[shinken]'
   end

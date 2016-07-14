@@ -54,7 +54,7 @@ active_hosts_list.each do |host|
     mode   0644
     variables(
       type: 'host',
-      conf: host.merge(node['shinken']['host_defaults'])
+      conf: node['shinken']['host_defaults'].merge(host)
     )
     notifies :restart, 'service[shinken-arbiter]'
   end
