@@ -47,6 +47,9 @@ suites:
       - recipe[shinken::broker]
     attributes:
       shinken:
+        host_defaults:
+          event_handler: notify_slack_for_host!#ops
+          event_handler_enabled: 1
         hosts:
           - host_name: stage-api
             address: stage-api.evertrue.com
