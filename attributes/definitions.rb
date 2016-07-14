@@ -1,5 +1,5 @@
 default['shinken']['global_defaults'] = {
-  'max_check_attempts' => 4,
+  'max_check_attempts' => 1,
   'check_period' => '24x7',
   'notification_period' => '24x7'
 }

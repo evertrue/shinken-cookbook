@@ -36,6 +36,7 @@ describe 'Shinken Config' do
   end
 
   context file('/etc/shinken/services/test-dns.cfg') do
+    its(:content) { is_expected.to match 'max_check_attempts 1' }
     its(:content) { is_expected.to match 'check_interval 6' }
   end
 
