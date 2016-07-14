@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 1.12.5
+
+* Set default max_check_attempts to 1
+
 # 1.12.4
 
 * Check that test-dns config is merged correctly
