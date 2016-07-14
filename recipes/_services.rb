@@ -34,6 +34,10 @@ if Dir.exist?("#{node['shinken']['conf_dir']}/services")
 end
 
 node['shinken']['services'].each do |svc_name, svc_conf|
+  # Enable the event handler if one is specified unless it has been explicitly
+  # disabled.
+  svc_conf = { 'event_handler_enabled' => 0 }.merge(svc_conf) if svc_conf['event_handler']
+
   if svc_conf['hostgroup_name'] &&
      !node['shinken']['hostgroups'][svc_conf['hostgroup_name']]
     fail "Service #{svc_name} refers to hostgroup " \

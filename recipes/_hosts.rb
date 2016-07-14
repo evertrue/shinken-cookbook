@@ -47,6 +47,10 @@ if Dir.exist?("#{node['shinken']['conf_dir']}/hosts")
 end
 
 active_hosts_list.each do |host|
+  # Enable the event handler if one is specified unless it has been explicitly
+  # disabled.
+  host = { 'event_handler_enabled' => 0 }.merge(host) if host['event_handler']
+
   template "#{node['shinken']['conf_dir']}/hosts/#{host['host_name']}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
