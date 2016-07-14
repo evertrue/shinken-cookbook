@@ -5,6 +5,7 @@ default['shinken']['global_defaults'] = {
 }
 default['shinken']['service_defaults'] =
   node['shinken']['global_defaults'].merge(
+    'use' => 'generic-service',
     'check_interval' => 5,
     'retry_interval' => 10,
     'notification_interval' => 30
