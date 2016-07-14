@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.12.3
+
+* Inherit generic-service in all services
+* Serverspec: Expect status code 2 from cassandra check
+
 # 1.12.2
 
 * check_cassandra: Fail with 2 on connection refused
