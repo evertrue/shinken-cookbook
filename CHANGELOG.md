@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 1.12.4
+
+* Check that test-dns config is merged correctly
+* When merging, override defaults with specifics, not the other way around
+
 # 1.12.3
 
 * Inherit generic-service in all services
