@@ -9,7 +9,7 @@ class SlackNotificationHandler
   end
 
   def formatted_attachment
-    msg = "\*Shinken Notification:\* Service \"#{opts[:description]}"
+    msg = "\*Shinken Notification:\* Service \"#{opts[:description]}\""
     msg += " (Event ID: #{opts[:event_id]})" if opts[:event_id]
     msg += "\n\n*Entered State:* #{opts[:state]}\n\n" \
           "*Environment:* #{opts[:env].upcase}"
