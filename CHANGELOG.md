@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.1
+
+* Add missing quote to Slack notifier message
+
 ## 1.13.0
 
 * Bump Shinken source install to 2.4.3
