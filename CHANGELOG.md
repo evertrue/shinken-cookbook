@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.2
+
+* Fix the supplied arguments for notify_slack_for_host
+
 ## 1.13.1
 
 * Add missing quote to Slack notifier message
