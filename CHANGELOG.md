@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.14.0
+
+* New plugin: check_elasticsearch
+
 ## 1.13.2
 
 * Fix the supplied arguments for notify_slack_for_host
