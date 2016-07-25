@@ -28,6 +28,7 @@ package 'ruby2.2-dev'
 # Our plugins
 %w(
   check_cassandra
+  check_elasticsearch
   check_inodes_snmp
   check_mesos_resource
 ).each do |plugin|

@@ -84,6 +84,15 @@ describe 'Nagios Plugin Setup' do
     end
   end
 
+  describe 'check_elasticsearch' do
+    context file('/usr/lib/nagios/plugins/check_elasticsearch') do
+      it { should be_mode 755 }
+      it { should be_owned_by 'root' }
+      it { should be_grouped_into 'root' }
+      it { should be_executable.by_user 'shinken' }
+    end
+  end
+
   context 'Bogus hostname is supplied' do
     describe command('/usr/lib/nagios/plugins/check_cassandra -I foobar') do
       its(:exit_status) { should eq 2 }

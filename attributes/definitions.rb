@@ -22,6 +22,10 @@ default['shinken']['commands'] = {
     'command_name' => 'check_cassandra',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_cassandra -I $HOSTADDRESS$'
   },
+  'check_elasticsearch' => {
+    'command_name' => 'check_elasticsearch',
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_elasticsearch -I $HOSTADDRESS$'
+  },
   'check_http' => {
     'command_name' => 'check_http',
     'command_line' => '$NAGIOSPLUGINSDIR$/check_http -I $HOSTADDRESS$ ' \
