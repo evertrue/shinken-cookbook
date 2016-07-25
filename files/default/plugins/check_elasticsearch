@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require 'trollop'
+require 'unirest'
+
+class CriticalStateException < StandardError; end
+
+class CheckElasticsearch
+  def self.check_node!
+    return if status == 'green'
+    raise CriticalStateException 
+  end
+
+  def status
+    Unirest.get("http://#{opts[:hostname]}:9200/_cluster/health").body['status']
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :hostname,
+          'Host to check',
+          short: '-I',
+          required: true,
+          type: :string
+    end
+  end
+end
+
+begin
+  CheckElasticsearch.check_node!
+  puts 'ELASTICSEARCH OK'
+rescue CriticalStateException => e
+  puts "ELASTICSEARCH CRITICAL - #{e.message}"
+  exit 2
+rescue Interrupt
+  puts 'Interrupt'
+  exit 3
+rescue Exception => e
+  puts "Error: #{e.message}"
+  puts e.backtrace.join("\n")
+  exit 3
+end
