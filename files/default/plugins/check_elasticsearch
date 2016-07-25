@@ -7,8 +7,9 @@ class CriticalStateException < StandardError; end
 
 class CheckElasticsearch
   def self.check_node!
-    return if status == 'green'
-    raise CriticalStateException 
+    st = CheckElasticsearch.new.status
+    return if st == 'green'
+    raise CriticalStateException, "Cluster status: #{st}"
   end
 
   def status
