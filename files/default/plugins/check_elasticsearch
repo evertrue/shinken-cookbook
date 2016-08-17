@@ -36,6 +36,8 @@ rescue CriticalStateException => e
 rescue Interrupt
   puts 'Interrupt'
   exit 3
+rescue SystemExit => e
+  raise e
 rescue Exception => e
   puts "Error: #{e.message}"
   puts e.backtrace.join("\n")
