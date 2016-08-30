@@ -1,6 +1,7 @@
 # Installs Nagios plugins
 
 include_recipe 'apt'
+include_recipe 'build-essential'  # Required by cassandra-driver gem which uses native code
 
 %w(
   nagios-plugins
