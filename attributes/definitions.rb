@@ -60,6 +60,22 @@ default['shinken']['commands'] = {
       '--command=\'test -f /var/run/reboot-required\' ' \
       "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
   },
+  'check_remote_process' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
+                      '-H $HOSTADDRESS$ ' \
+                      "--logname #{node['shinken']['agent_user']} " \
+                      "--command='pgrep -f $ARG1$' " \
+                      '-o StrictHostKeyChecking=no ' \
+                      "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
+  },
+  'check_remote_process_memory' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
+                      '-H $HOSTADDRESS$ ' \
+                      "--logname #{node['shinken']['agent_user']} " \
+                      "--command='[[ $(ps ho rss $(pgrep $ARG1$)) < $ARG2$ ]]' " \
+                      '-o StrictHostKeyChecking=no ' \
+                      "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
+  },
   'notify_pagerduty_for_service' => {
     'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
       '--description="$SERVICEDESC$" ' \
