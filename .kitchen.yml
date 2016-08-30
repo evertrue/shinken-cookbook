@@ -21,20 +21,14 @@ transport:
 provisioner:
   name: chef_zero
   client_rb:
-    environment: 'test'
+    environment: test
   encrypted_data_bag_secret_key_path: test/integration/encrypted_data_bag_secret
 
 platforms:
   - name: ubuntu-14.04
-    driver:
-      image_id: ami-7d7d7c17
 
 suites:
   - name: default
-    driver_config:
-      network:
-        - - private_network
-          - ip: '192.168.33.11'
     run_list:
       - recipe[ec2ohaihints::default]
       - recipe[et_hostname::default]
@@ -62,9 +56,6 @@ suites:
             service_description: Auth API Stage
             check_command: check_https!443!/auth/health
         install_type: source
-      et_hostname:
-        addl_hosts_entries:
-          - '192.168.33.11 test-dns.local'
       ec2dnsserver:
         contact_email: 'hostmaster@yourdomain.local'
         recursion_clients:
