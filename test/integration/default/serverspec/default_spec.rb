@@ -46,8 +46,10 @@ describe 'Shinken Config' do
     its(:content) { should match(/email testuser@local/) }
   end
 
-  describe file('/etc/shinken/commands/check_inodes.cfg') do
-    it { is_expected.to be_file }
+  %w(check_inodes check_remote_process check_remote_process_memory).each do |cmd|
+    describe file "/etc/shinken/commands/#{cmd}.cfg" do
+      it { is_expected.to be_file }
+    end
   end
 end
 
