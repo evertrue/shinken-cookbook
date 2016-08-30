@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.15.0
+
+* Use the same value for command name and command definition file name (if `command_name` is undefined)
+* Include build-essential cookbook (cassandra-driver gem requires it for building native code)
+* Add new command definitions
+    * check_remote_process - Moved from the wrapper cookbook, just checks (using `check_by_ssh` with `pgrep`) to see if a process is running on a remote server.
+    * check_remote_process_memory - This one's completely new and checks (again using `check_by_ssh`) to see if `ARG1` has a resident memory size ("RSS") greater than `ARG2` kilobytes.
+
 ## 1.14.0
 
 * New plugin: check_elasticsearch
