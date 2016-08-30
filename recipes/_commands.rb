@@ -18,6 +18,9 @@
 #
 
 node['shinken']['commands'].each do |cmd_name, cmd_conf|
+  cmd_conf = cmd_conf.to_h  # By default node attributes are immutable
+  cmd_conf['command_name'] ||= cmd_name
+
   template "#{node['shinken']['conf_dir']}/commands/#{cmd_name}.cfg" do
     source 'generic-definition.cfg.erb'
     owner  node['shinken']['user']
