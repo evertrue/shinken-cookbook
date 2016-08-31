@@ -72,7 +72,7 @@ default['shinken']['commands'] = {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
                       '-H $HOSTADDRESS$ ' \
                       "--logname #{node['shinken']['agent_user']} " \
-                      "--command='[[ $(ps ho rss $(pgrep $ARG1$)) < $ARG2$ ]]' " \
+                      "--command='[[ $$(ps ho rss $$(pgrep $ARG1$)) < $ARG2$ ]]' " \
                       '-o StrictHostKeyChecking=no ' \
                       "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
   },
