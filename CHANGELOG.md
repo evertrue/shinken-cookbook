@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.1
+
+* Escape $ in command definition so that Shinken doesn't interpret it
+
 ## 1.15.0
 
 * Use the same value for command name and command definition file name (if `command_name` is undefined)
