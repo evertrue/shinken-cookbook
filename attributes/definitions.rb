@@ -91,7 +91,7 @@ default['shinken']['commands'] = {
   },
   'notify_slack_for_host' => {
     'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/slack_handler " \
-      '--description="Host Notification"' \
+      '--description="Host Notification" ' \
       "--env=#{node.chef_environment} " \
       '--state=$HOSTSTATE$ ' \
       '--output="$HOSTOUTPUT$" ' \
