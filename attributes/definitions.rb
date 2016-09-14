@@ -95,7 +95,7 @@ default['shinken']['commands'] = {
       "--env=#{node.chef_environment} " \
       '--state=$HOSTSTATE$ ' \
       '--output="$HOSTOUTPUT$" ' \
-      '--host=$HOSTNAME$' \
+      '--host=$HOSTNAME$ ' \
       '--channel=$ARG1$'
   },
   'notify_slack_for_service' => {
