@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.3
+
+* Another missing space...
+
 ## 1.15.2
 
 * Add missing space to notify_slack_for_service definition
