@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.15.4
+
+* Notifications: Create a distinction between host ping and other host services
+* Drop misleading word "service" from Slack notification description
+
 ## 1.15.3
 
 * Another missing space...
