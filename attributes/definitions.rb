@@ -84,17 +84,33 @@ default['shinken']['commands'] = {
   },
   'notify_pagerduty_for_host' => {
     'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
-      '--description="$SERVICEDESC$" ' \
+      '--description="Host Ping" ' \
+      "--env=#{node.chef_environment} " \
+      '--host=$HOSTNAME$ ' \
+      '--state=$HOSTSTATE$'
+  },
+  'notify_pagerduty_for_host_service' => {
+    'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/pagerduty_handler " \
+      '--description="Host Service $SERVICEDESC$" ' \
       "--env=#{node.chef_environment} " \
       '--host=$HOSTNAME$ ' \
       '--state=$SERVICESTATE$'
   },
   'notify_slack_for_host' => {
     'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/slack_handler " \
-      '--description="Host Notification" ' \
+      '--description="Host Ping" ' \
       "--env=#{node.chef_environment} " \
       '--state=$HOSTSTATE$ ' \
       '--output="$HOSTOUTPUT$" ' \
+      '--host=$HOSTNAME$ ' \
+      '--channel=$ARG1$'
+  },
+  'notify_slack_for_host_service' => {
+    'command_line' => "#{node['shinken']['conf_dir']}/notification-handlers/slack_handler " \
+      '--description="Host Service $SERVICEDESC$" ' \
+      "--env=#{node.chef_environment} " \
+      '--state=$SERVICESTATE$ ' \
+      '--output="$SERVICEOUTPUT$" ' \
       '--host=$HOSTNAME$ ' \
       '--channel=$ARG1$'
   },
