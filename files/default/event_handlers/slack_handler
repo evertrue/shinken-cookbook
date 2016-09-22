@@ -5,7 +5,7 @@ require 'slack-notifier'
 
 class SlackNotificationHandler
   def run
-    opts[:state] == 'OK' ? resolve : notify
+    %w(OK UP).include?(opts[:state]) ? resolve : notify
   end
 
   def formatted_attachment
