@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.15.5
+
+* For Slack notifications: UP also counts as a good state.
+
 ## 1.15.4
 
 * Notifications: Create a distinction between host ping and other host services
