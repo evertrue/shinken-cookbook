@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-ark 'mod-webui' do
+ark 'mod-webui2' do
   url node['shinken']['webui']['source_url']
   checksum node['shinken']['webui']['source_checksum']
   path Chef::Config[:file_cache_path]
   action :put
-  notifies :run, 'execute[install-webui]'
+  notifies :run, 'execute[install-webui2]'
   only_if { node['shinken']['install_type'] == 'source' }
 end
 
@@ -33,16 +33,16 @@ end
 python_pip 'pymongo'
 package 'mongodb'
 
-execute 'install-webui' do
+execute 'install-webui2' do
   if node['shinken']['install_type'] == 'source'
     command '/usr/bin/shinken install --local ' \
-      "#{Chef::Config[:file_cache_path]}/mod-webui"
+      "#{Chef::Config[:file_cache_path]}/mod-webui2"
   else
     command '/usr/bin/shinken install webui2'
   end
   user node['shinken']['user']
   environment('HOME' => node['shinken']['home'])
-  creates "#{node['shinken']['home']}/modules/webui"
+  creates "#{node['shinken']['home']}/modules/webui2"
   action  :run
   notifies :restart, 'service[shinken]'
 end
