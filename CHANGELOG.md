@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+* Actually install the webui2 module when running in package install mode
+
 ## 2.0.0
 
 * Upgrade the webui module to v2.4.2c
