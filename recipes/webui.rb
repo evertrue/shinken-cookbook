@@ -26,6 +26,13 @@ ark 'mod-webui' do
   only_if { node['shinken']['install_type'] == 'source' }
 end
 
+python_pip 'bottle' do
+  version '0.12.8'
+end
+
+python_pip 'pymongo'
+package 'mongodb'
+
 execute 'install-webui' do
   if node['shinken']['install_type'] == 'source'
     command '/usr/bin/shinken install --local ' \
@@ -54,10 +61,8 @@ end
   end
 end
 
-template '/etc/shinken/modules/webui.cfg' do
-  source 'webui.cfg.erb'
+template '/etc/shinken/modules/webui2.cfg' do
   owner  node['shinken']['user']
   group  node['shinken']['group']
-  mode   0644
   notifies :restart, 'service[shinken]'
 end

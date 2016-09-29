@@ -1,8 +1,8 @@
 default['shinken']['webui'] = {
   'source_url' =>
-    'https://github.com/shinken-monitoring/mod-webui/archive/BS3-1.0.zip',
+    'https://github.com/shinken-monitoring/mod-webui/archive/2.4.2c.zip',
   'source_checksum' =>
-    'fa98d65ba556f4ed7c6f77f61b25726a6cb4729aa6f42b609cf0f05fed78abb6',
+    '5119f504c5d467e43e0ea09f81fbedcc7a2ebf8549e531b276ed6b6b5874deaf',
   'credentials_data_bag' => 'secrets',
   'credentials_data_bag_item' => 'monitoring',
   'port' => '7767',
