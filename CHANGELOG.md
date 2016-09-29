@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.0.0
+
+* Upgrade the webui module to v2.4.2c
+* Add copy-button patch to the webui code
+
 ## 1.15.5
 
 * For Slack notifications: UP also counts as a good state.
