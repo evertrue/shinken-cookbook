@@ -38,7 +38,7 @@ execute 'install-webui' do
     command '/usr/bin/shinken install --local ' \
       "#{Chef::Config[:file_cache_path]}/mod-webui"
   else
-    command '/usr/bin/shinken install webui'
+    command '/usr/bin/shinken install webui2'
   end
   user node['shinken']['user']
   environment('HOME' => node['shinken']['home'])
