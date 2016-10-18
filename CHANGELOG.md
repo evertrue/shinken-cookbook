@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.2
+
+* Don't use arithmetic operator for memory usage comparison (it doesn't work)
+
 ## 2.0.1
 
 * Actually install the webui2 module when running in package install mode
