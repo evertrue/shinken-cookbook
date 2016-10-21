@@ -32,3 +32,8 @@ execute 'shinken_setup_py' do
   creates '/usr/bin/shinken'
   cwd "#{Chef::Config[:file_cache_path]}/shinken"
 end
+
+directory '/var/run/shinken' do
+  owner  node['shinken']['user']
+  group  node['shinken']['group']
+end

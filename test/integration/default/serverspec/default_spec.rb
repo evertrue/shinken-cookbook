@@ -15,6 +15,12 @@ describe 'Environment' do
       it { should be_installed }
     end
   end
+
+  describe file '/var/run/shinken' do
+    it { is_expected.to be_directory }
+    it { is_expected.to be_owned_by 'shinken' }
+    it { is_expected.to be_grouped_into 'shinken' }
+  end
 end
 
 describe 'Shinken Config' do
