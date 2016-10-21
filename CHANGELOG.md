@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.3
+
+* Ensure that /var/run/shinken is owned by shinken/shinken
+
 ## 2.0.2
 
 * Don't use arithmetic operator for memory usage comparison (it doesn't work)
