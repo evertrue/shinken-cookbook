@@ -21,6 +21,14 @@ default['shinken']['commands'] = {
   'check_cassandra' => {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_cassandra -I $HOSTADDRESS$'
   },
+  'check_deleted_files' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
+                      '-H $HOSTADDRESS$ ' \
+                      "--logname #{node['shinken']['agent_user']} " \
+                      "--command='[ $$(sudo lsof -nP +L1 | wc -l) -le $ARG1$ ]' " \
+                      '-o StrictHostKeyChecking=no ' \
+                      "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
+  },
   'check_elasticsearch' => {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_elasticsearch -I $HOSTADDRESS$'
   },
