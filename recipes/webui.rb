@@ -50,6 +50,9 @@ end
 %w(
   auth-cfg-password
   sqlitedb
+  graphite
+  livestatus
+  logstore-sqlite
 ).each do |mod|
   execute "install-#{mod}" do
     command "/usr/bin/shinken install #{mod}"
@@ -59,6 +62,18 @@ end
     action  :run
     notifies :restart, 'service[shinken]'
   end
+end
+
+directory "#{node['shinken']['home']}/var/rw" do
+  recursive true
+  owner node['shinken']['user']
+  group node['shinken']['group']
+end
+
+template '/etc/shinken/modules/livestatus.cfg' do
+  owner node['shinken']['user']
+  group node['shinken']['group']
+  notifies :restart, 'service[shinken]'
 end
 
 template '/etc/shinken/modules/webui2.cfg' do

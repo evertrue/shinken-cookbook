@@ -1,6 +1,7 @@
 default['shinken']['broker'] = {
   'port' => '7772',
   'modules' => [
-    'webui2'
+    'webui2',
+    'livestatus'
   ]
 }
