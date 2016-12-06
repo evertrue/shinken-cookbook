@@ -14,7 +14,7 @@ before_install:
 - echo 'node_name "trubot"' >> ~/.chef/knife.rb
 install:
 - eval "$(chef shell-init bash)"
-- chef gem install kitchen-ec2
+- chef gem install kitchen-ec2 kitchen-sync
 - berks
 before_script:
 - chef --version
@@ -24,7 +24,8 @@ script:
 - rubocop
 - foodcritic .
 - chef exec rspec
+- kitchen test ${SUITE} -d always
 # - kitchen test -d always
 env:
-  global:
-  - KITCHEN_YAML=.kitchen.cloud.yml
+  matrix:
+  - SUITE: default
