@@ -10,3 +10,6 @@ default['shinken']['source_checksum'] =
 
 default['shinken']['agent_key_data_bag'] = 'secrets'
 default['shinken']['agent_key_data_bag_item'] = 'monitoring'
+
+default['shinken']['services'] = {}
+default['shinken']['hostgroups'] = {}
