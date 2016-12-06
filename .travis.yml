@@ -1,0 +1,30 @@
+language: ruby
+cache:
+  directories:
+  - "$HOME/.berkshelf"
+rvm: 2.3
+addons:
+  apt:
+    sources:
+    - chef-stable-precise
+    packages:
+    - chefdk
+before_install:
+- mkdir ~/.chef
+- echo 'node_name "trubot"' >> ~/.chef/knife.rb
+install:
+- eval "$(chef shell-init bash)"
+- chef gem install kitchen-ec2
+- berks
+before_script:
+- chef --version
+- rubocop --version
+- foodcritic --version
+script:
+- rubocop
+- foodcritic .
+- chef exec rspec
+# - kitchen test -d always
+env:
+  global:
+  - KITCHEN_YAML=.kitchen.cloud.yml
