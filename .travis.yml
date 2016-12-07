@@ -3,6 +3,9 @@ cache:
   directories:
   - "$HOME/.berkshelf"
 rvm: 2.3
+branches:
+  only:
+  - master
 addons:
   apt:
     sources:
