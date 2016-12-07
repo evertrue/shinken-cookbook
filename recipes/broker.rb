@@ -19,8 +19,8 @@
 
 template '/etc/shinken/brokers/broker-master.cfg' do
   source 'broker-master.cfg.erb'
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
   mode   0644
   notifies :restart, 'service[shinken]'
 end

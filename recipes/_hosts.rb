@@ -53,8 +53,8 @@ active_hosts_list.each do |host|
 
   template "#{node['shinken']['conf_dir']}/hosts/#{host['host_name']}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
+    owner  'shinken'
+    group  'shinken'
     mode   0644
     variables(
       type: 'host',

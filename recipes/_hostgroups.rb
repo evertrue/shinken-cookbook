@@ -50,8 +50,8 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
 
   template "#{node['shinken']['conf_dir']}/hostgroups/#{hg_name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
+    owner  'shinken'
+    group  'shinken'
     mode   0644
     variables(
       type: 'hostgroup',

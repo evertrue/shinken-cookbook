@@ -18,15 +18,15 @@
 #
 
 directory "#{node['shinken']['home']}/.ssh" do
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
   mode   0700
   action :create
 end
 
 file "#{node['shinken']['home']}/.ssh/id_rsa" do
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
   mode   0600
   content(
     data_bag_item(
