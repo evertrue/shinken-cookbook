@@ -39,6 +39,9 @@ suites:
       - recipe[shinken::default]
       - recipe[shinken::webui]
       - recipe[shinken::broker]
+    driver:
+      tags:
+        Name: shinken-default-<%= ENV['USER'] %>-ubuntu-1404
     attributes:
       shinken:
         host_defaults:
