@@ -40,7 +40,7 @@ execute 'install-webui2' do
   else
     command '/usr/bin/shinken install webui2'
   end
-  user node['shinken']['user']
+  user 'shinken'
   environment('HOME' => node['shinken']['home'])
   creates "#{node['shinken']['home']}/modules/webui2"
   action  :run
@@ -53,7 +53,7 @@ end
 ).each do |mod|
   execute "install-#{mod}" do
     command "/usr/bin/shinken install #{mod}"
-    user node['shinken']['user']
+    user 'shinken'
     environment('HOME' => node['shinken']['home'])
     creates "#{node['shinken']['home']}/modules/#{mod}"
     action  :run
@@ -62,8 +62,8 @@ end
 end
 
 template '/etc/shinken/modules/webui2.cfg' do
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
   notifies :restart, 'service[shinken]'
 end
 
@@ -76,6 +76,6 @@ end
 ).each do |filename|
   cookbook_file "/var/lib/shinken/modules/webui2/plugins/eltdetail/#{filename}" do
     source "webui2/#{File.basename filename}"
-    owner  node['shinken']['user']
+    owner  'shinken'
   end
 end

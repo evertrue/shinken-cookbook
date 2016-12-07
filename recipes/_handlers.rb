@@ -21,8 +21,8 @@ package 'ruby2.2'
 gem_package 'trollop'
 
 directory '/etc/shinken/notification-handlers' do
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
 end
 
 include_recipe 'shinken::pagerduty_handler' if node['shinken']['handlers']['pagerduty']

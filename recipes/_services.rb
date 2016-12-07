@@ -47,8 +47,8 @@ node['shinken']['services'].each do |svc_name, svc_conf|
 
   template "#{node['shinken']['conf_dir']}/services/#{svc_name}.cfg" do
     source 'generic-definition.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
+    owner  'shinken'
+    group  'shinken'
     mode   0644
     variables(
       type: 'service',
