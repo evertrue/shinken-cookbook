@@ -61,6 +61,7 @@ describe 'shinken::default' do
           }
 
         )
+        stub_command('test -u /usr/lib/nagios/plugins/check_icmp').and_return(true)
       end.converge described_recipe
     end
 
