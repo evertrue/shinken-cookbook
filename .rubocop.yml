@@ -8,3 +8,18 @@ LineLength:
 # Lining up the attributes of some methods is advantageous for readability
 Style/SpaceBeforeFirstArg:
   Enabled: false
+
+MethodLength:
+  Max: 30
+
+AbcSize:
+  Max: 30
+
+ClassLength:
+  Max: 100
+
+Documentation:
+  Enabled: false
+
+Style/SpaceBeforeFirstArg:
+  Enabled: false

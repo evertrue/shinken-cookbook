@@ -40,7 +40,7 @@ node['shinken']['services'].each do |svc_name, svc_conf|
 
   if svc_conf['hostgroup_name'] &&
      !node['shinken']['hostgroups'][svc_conf['hostgroup_name']]
-    fail "Service #{svc_name} refers to hostgroup " \
+    raise "Service #{svc_name} refers to hostgroup " \
       "#{svc_conf['hostgroup_name']} but that hostgroup does not seem to " \
       'exist.'
   end

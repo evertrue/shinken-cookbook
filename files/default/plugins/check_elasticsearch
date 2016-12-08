@@ -27,6 +27,7 @@ class CheckElasticsearch
   end
 end
 
+# rubocop:disable RescueException
 begin
   CheckElasticsearch.check_node!
   puts 'ELASTICSEARCH OK'
@@ -43,3 +44,4 @@ rescue Exception => e
   puts e.backtrace.join("\n")
   exit 3
 end
+# rubocop:enable RescueException

@@ -40,12 +40,12 @@ node['shinken']['hostgroups'].each do |hg_name, hg_conf|
   if hg_conf['search_str']
     conf['members'] = search(
       :node,
-      node['shinken']['host_search_query'] + " AND " + hg_conf['search_str']
+      node['shinken']['host_search_query'] + ' AND ' + hg_conf['search_str']
     ).map(&:name).join(',')
   elsif hg_conf['members']
     conf['members'] = hg_conf['members'].join(',')
   else
-    fail "Hostgroup #{hg_name} must contain either `search_str` or `members`."
+    raise "Hostgroup #{hg_name} must contain either `search_str` or `members`."
   end
 
   template "#{node['shinken']['conf_dir']}/hostgroups/#{hg_name}.cfg" do

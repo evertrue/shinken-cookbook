@@ -27,7 +27,7 @@ if credentials['shinken']
   shinken_users = search(:users, 'shinken:*')
 
   shinken_users.each do |contact|
-    fail "Missing credentials for #{contact['id']} in data_bag_item[" \
+    raise "Missing credentials for #{contact['id']} in data_bag_item[" \
       "#{node['shinken']['webui']['credentials_data_bag']}::" \
       "#{node['shinken']['webui']['credentials_data_bag_item']}]" unless credentials['shinken'][contact['id']]
     template "#{node['shinken']['conf_dir']}/contacts/#{contact['id']}.cfg" do

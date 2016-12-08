@@ -18,7 +18,7 @@ class SlackNotificationHandler
     msg += "*URL:* #{opts[:url]}\n" if opts[:url]
     msg += "\n*Output:*\n\`\`\`\n#{opts[:output]}\n\`\`\`\n" if opts[:output]
 
-    attachment = {
+    {
       mrkdwn: true,
       fallback: msg,
       text: msg,
@@ -27,18 +27,18 @@ class SlackNotificationHandler
   end
 
   def notify
-    slack.ping attachments: [formatted_attachment.merge({ color: 'danger' })]
+    slack.ping attachments: [formatted_attachment.merge(color: 'danger')]
   end
 
   def resolve
-    slack.ping attachments: [formatted_attachment.merge({ color: 'good' })]
+    slack.ping attachments: [formatted_attachment.merge(color: 'good')]
   end
 
   private
 
   def slack
     @slack ||= begin
-      sl = Slack::Notifier.new(ENV['SLACK_WEBHOOK'] || File.read('/etc/shinken/slack_webhook').chomp)
+      sl = Slack::Notifier.new ENV['SLACK_WEBHOOK'] || File.read('/etc/shinken/slack_webhook').chomp
       sl.channel = opts[:channel]
       sl.username = 'Shinken Notifier'
       sl

@@ -39,10 +39,9 @@ if node['platform_family'] == 'debian'
     check_icmp
   ).each do |plugin|
     execute "statoverride-#{plugin}" do
-      command 'dpkg-statoverride --update --add root ' \
-        "shinken 4750 /usr/lib/nagios/plugins/#{plugin}"
+      command "dpkg-statoverride --update --add root shinken 4750 /usr/lib/nagios/plugins/#{plugin}"
       not_if "test -u /usr/lib/nagios/plugins/#{plugin}"
-      action  :run
+      action :run
     end
   end
 end
