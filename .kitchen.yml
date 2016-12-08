@@ -1,16 +1,15 @@
 ---
 driver:
   name: ec2
+  require_chef_omnibus: 12.14.60
   aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
   region: us-east-1
   availability_zone: us-east-1b
-  security_group_ids:
-    - sg-97e55ef2
-  instance_type: c3.xlarge
-  interface: private
-  subnet_id: subnet-a792da8f
+  security_group_ids: ['ci-testing']
+  instance_type: c3.large
+  interface: public
   tags:
-    Env: private
+    Env: public
     Type: test
   iam_profile_name: test-ec2dnsserver
 
