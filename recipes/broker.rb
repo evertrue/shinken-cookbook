@@ -37,3 +37,9 @@ end
     notifies :restart, 'service[shinken]'
   end
 end
+
+template '/etc/shinken/modules/livestatus.cfg' do
+  owner 'shinken'
+  group 'shinken'
+  notifies :restart, 'service[shinken]'
+end

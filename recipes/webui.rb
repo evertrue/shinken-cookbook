@@ -68,12 +68,6 @@ directory "#{node['shinken']['home']}/var/rw" do
   group node['shinken']['group']
 end
 
-template '/etc/shinken/modules/livestatus.cfg' do
-  owner node['shinken']['user']
-  group node['shinken']['group']
-  notifies :restart, 'service[shinken]'
-end
-
 template '/etc/shinken/modules/webui2.cfg' do
   owner  'shinken'
   group  'shinken'
