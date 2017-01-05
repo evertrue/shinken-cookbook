@@ -52,7 +52,6 @@ end
   sqlitedb
   graphite
   livestatus
-  logstore-sqlite
 ).each do |mod|
   execute "install-#{mod}" do
     command "/usr/bin/shinken install #{mod}"
