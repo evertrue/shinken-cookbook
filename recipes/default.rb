@@ -21,7 +21,7 @@ if Chef::Config[:solo]
   Chef::Log.warn 'This recipe uses search. Chef Solo does not support search.'
 end
 
-user node['shinken']['user'] do
+user 'shinken' do
   home node['shinken']['home']
   shell '/bin/bash'
 end
@@ -39,10 +39,9 @@ if node['platform_family'] == 'debian'
     check_icmp
   ).each do |plugin|
     execute "statoverride-#{plugin}" do
-      command 'dpkg-statoverride --update --add root ' \
-        "#{node['shinken']['group']} 4750 /usr/lib/nagios/plugins/#{plugin}"
+      command "dpkg-statoverride --update --add root shinken 4750 /usr/lib/nagios/plugins/#{plugin}"
       not_if "test -u /usr/lib/nagios/plugins/#{plugin}"
-      action  :run
+      action :run
     end
   end
 end
@@ -55,7 +54,7 @@ include_recipe 'shinken::definitions'
 
 execute 'shinken-init' do
   command 'shinken --init'
-  user node['shinken']['user']
+  user 'shinken'
   environment('HOME' => node['shinken']['home'])
   creates "#{node['shinken']['home']}/.shinken.ini"
   action  :run

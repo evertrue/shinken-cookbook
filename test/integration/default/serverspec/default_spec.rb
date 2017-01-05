@@ -128,6 +128,7 @@ describe 'Shinken Services' do
     7767,
     7768,
     7769,
+    7770,
     7771,
     7772,
     7773,
@@ -137,11 +138,6 @@ describe 'Shinken Services' do
       # it { should be_listening.on('0.0.0.0').with('tcp') }
       it { should be_listening.with('tcp') }
     end
-  end
-
-  context port(7770) do
-    # it { should be_listening.on('127.0.0.1').with('tcp') }
-    it { should be_listening.with('tcp') }
   end
 end
 

@@ -10,22 +10,24 @@ class CheckInodesSnmp
     if opts[:device]
       raise ArgumentError, "Device #{opts[:device]} not found" unless stats[opts[:device]]
       print 'INODES '
+
       if stats[opts[:device]] >= opts[:threshold]
         puts "CRITICAL: #{opts[:device]} #{stats[opts[:device]]}/100"
         raise CriticalStateException
-      else
-        puts "OK: #{opts[:device]} #{stats[opts[:device]]}/100"
       end
+
+      puts "OK: #{opts[:device]} #{stats[opts[:device]]}/100"
     else
-      critical_devices = stats.select { |k, v| v >= opts[:threshold] }
-      if critical_devices.empty?
-        puts 'INODES OK'
-      else
+      critical_devices = stats.select { |_k, v| v >= opts[:threshold] }
+
+      if critical_devices.any?
         print 'INODES CRITICAL:'
         critical_devices.each { |dev, val| print " #{dev} #{val}/100;" }
         puts
         raise CriticalStateException
       end
+
+      puts 'INODES OK'
     end
   end
 
@@ -74,11 +76,14 @@ class CheckInodesSnmp
   end
 end
 
+# rubocop:disable RescueException
 begin
   CheckInodesSnmp.new.run
 rescue CriticalStateException
   exit 2
-rescue => e
+rescue Exception => e
   puts e.message
+  puts e.backtrace.join("\n")
   exit 3
 end
+# rubocop:enable RescueException

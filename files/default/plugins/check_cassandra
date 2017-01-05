@@ -12,7 +12,7 @@ class CheckCassandra
   end
 
   def status
-    cluster.hosts.find{ |h| h.ip == Resolv.getaddress(opts[:hostname]) }.status
+    cluster.hosts.find { |h| h.ip == Resolv.getaddress(opts[:hostname]) }.status
   end
 
   def cluster
@@ -32,6 +32,7 @@ class CheckCassandra
   end
 end
 
+# rubocop:disable RescueException
 begin
   CheckCassandra.check_node!
   puts 'CASSANDRA NODE OK'
@@ -46,3 +47,4 @@ rescue Exception => e
   puts e.backtrace.join("\n")
   exit 3
 end
+# rubocop:enable RescueException

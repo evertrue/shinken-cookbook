@@ -34,6 +34,6 @@ execute 'shinken_setup_py' do
 end
 
 directory '/var/run/shinken' do
-  owner  node['shinken']['user']
-  group  node['shinken']['group']
+  owner  'shinken'
+  group  'shinken'
 end

@@ -1,0 +1,38 @@
+language: ruby
+cache:
+  directories:
+  - "$HOME/.berkshelf"
+rvm: 2.3
+branches:
+  only:
+  - master
+addons:
+  apt:
+    sources:
+    - chef-stable-precise
+    packages:
+    - chefdk
+before_install:
+- openssl aes-256-cbc -K $encrypted_9f086e311e6a_key -iv $encrypted_9f086e311e6a_iv
+  -in travis_ci_ec2.pem.enc -out ~/.ssh/travis_ci_ec2.pem -d
+- mkdir ~/.chef
+- echo 'node_name "trubot"' >> ~/.chef/knife.rb
+install:
+- eval "$(chef shell-init bash)"
+- chef gem install kitchen-ec2 kitchen-sync
+- berks
+before_script:
+- chef --version
+- cookstyle --version
+- foodcritic --version
+script:
+- cookstyle
+- foodcritic .
+- chef exec rspec
+- kitchen test ${SUITE} -d always
+env:
+  matrix:
+  - SUITE: default
+  global:
+  - secure: fYWli5E9mfK8xCtb6k3v/igI4fl/XaT2gbEF4cyQKuxlldxo+ICqq71cfXufR5kRA4orJAxHYA1YlYG2U0B1WiBBTvVB59aaaKxlLdCY3N9l8LlJILXluEEzxaUyormMBfsXu07hbROiLkgCGogtGaKJxyorr6OnvMMzLyxus8s=
+  - secure: HRaHT7kfF1Q62o4rWdLHzL2lu/i/ro1HXvJYCK6sNo86goc7QFilj5o6uHBZXPQVcL3+ZqS9hMtlKwqu/w1rHqj2pA1CHOgkdHHCA0Iq6AE4t/odOtVCWaRluIuMQilc6isMzkZRgrzZygwsSsW0Nxr1oAw7ZD7pSn6r+1+pXIA=

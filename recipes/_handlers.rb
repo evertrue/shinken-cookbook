@@ -25,5 +25,5 @@ directory '/etc/shinken/notification-handlers' do
   group  'shinken'
 end
 
-include_recipe 'shinken::pagerduty_handler'
-include_recipe 'shinken::slack_handler'
+include_recipe 'shinken::pagerduty_handler' if node['shinken']['handlers']['pagerduty']
+include_recipe 'shinken::slack_handler' if node['shinken']['handlers']['slack']

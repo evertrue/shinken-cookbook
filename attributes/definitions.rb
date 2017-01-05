@@ -23,6 +23,7 @@ default['shinken']['commands'] = {
   },
   'check_deleted_files' => {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
+                      '--timeout 120 ' \
                       '-H $HOSTADDRESS$ ' \
                       "--logname #{node['shinken']['agent_user']} " \
                       "--command='[ $$(sudo lsof -nP +L1 | wc -l) -le $ARG1$ ]' " \

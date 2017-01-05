@@ -1,7 +1,7 @@
 # Installs Nagios plugins
 
 include_recipe 'apt'
-include_recipe 'build-essential'  # Required by cassandra-driver gem which uses native code
+include_recipe 'build-essential' # Required by cassandra-driver gem which uses native code
 
 %w(
   nagios-plugins
@@ -35,6 +35,6 @@ package 'ruby2.2-dev'
 ).each do |plugin|
   cookbook_file "#{node['shinken']['nagios_home']}/plugins/#{plugin}" do
     source "plugins/#{plugin}"
-    mode   0755
+    mode   0o755
   end
 end

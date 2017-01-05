@@ -27,13 +27,13 @@ if credentials['shinken']
   shinken_users = search(:users, 'shinken:*')
 
   shinken_users.each do |contact|
-    fail "Missing credentials for #{contact['id']} in data_bag_item[" \
+    raise "Missing credentials for #{contact['id']} in data_bag_item[" \
       "#{node['shinken']['webui']['credentials_data_bag']}::" \
       "#{node['shinken']['webui']['credentials_data_bag_item']}]" unless credentials['shinken'][contact['id']]
     template "#{node['shinken']['conf_dir']}/contacts/#{contact['id']}.cfg" do
       source 'generic-contact.cfg.erb'
-      owner  node['shinken']['user']
-      group  node['shinken']['group']
+      owner  'shinken'
+      group  'shinken'
       mode   0600
       variables(
         contact: contact,
@@ -45,8 +45,8 @@ if credentials['shinken']
 
   template "#{node['shinken']['conf_dir']}/contactgroups/admins.cfg" do
     source 'generic-contactgroups.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
+    owner  'shinken'
+    group  'shinken'
     mode   0644
     variables(
       cg_name: 'admins',
@@ -58,8 +58,8 @@ if credentials['shinken']
 
   template "#{node['shinken']['conf_dir']}/contactgroups/users.cfg" do
     source 'generic-contactgroups.cfg.erb'
-    owner  node['shinken']['user']
-    group  node['shinken']['group']
+    owner  'shinken'
+    group  'shinken'
     mode   0644
     variables(
       cg_name: 'users',
