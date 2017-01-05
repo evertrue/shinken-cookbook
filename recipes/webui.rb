@@ -50,7 +50,6 @@ end
 %w(
   auth-cfg-password
   sqlitedb
-  graphite
   livestatus
 ).each do |mod|
   execute "install-#{mod}" do

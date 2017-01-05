@@ -9,6 +9,5 @@ default['shinken']['webui'] = {
   'modules' => %w(
     auth-cfg-password
     SQLitedb
-    ui-graphite
   )
 }
