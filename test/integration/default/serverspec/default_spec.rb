@@ -130,7 +130,8 @@ describe 'Shinken Services' do
     7769,
     7771,
     7772,
-    7773
+    7773,
+    50000
   ].each do |p|
     context port(p) do
       # it { should be_listening.on('0.0.0.0').with('tcp') }
