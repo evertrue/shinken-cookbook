@@ -21,6 +21,5 @@ template '/etc/shinken/brokers/broker-master.cfg' do
   source 'broker-master.cfg.erb'
   owner  'shinken'
   group  'shinken'
-  mode   0644
   notifies :restart, 'service[shinken]'
 end
