@@ -8,14 +8,7 @@
 define module {
     module_name     livestatus
     module_type     livestatus
-    host            *           ; * = listen on all configured IP addresses
-    port            <%= node['shinken']['broker']['livestatus']['port'] %>
-    socket          <%= node['shinken']['home'] %>/var/rw/live  ; If a Unix socket is required
-    ## Available modules:
-    # - logstore-sqlite: send historical logs to a local sqlite database
-    # - logstore-mongodb: send historical logs to a mongodb database
-    # - logstore-null : send historical logs to a black hole
-    modules         <%= node['shinken']['broker']['livestatus'].join ',' %>
-    #debug           /tmp/ls.debug   ; Enable only for debugging this module
-    #debug_queries   0   ; Set to 1 to dump queries/replies too (very verbose)
+    <% node['shinken']['broker']['livestatus']['cfg_file'].each do |key, value| -%>
+    <%= key %> <%= value %>
+    <% end -%>
 }
