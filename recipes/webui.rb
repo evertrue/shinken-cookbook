@@ -62,12 +62,6 @@ end
   end
 end
 
-directory "#{node['shinken']['home']}/var/rw" do
-  recursive true
-  owner node['shinken']['user']
-  group node['shinken']['group']
-end
-
 template '/etc/shinken/modules/webui2.cfg' do
   owner  'shinken'
   group  'shinken'

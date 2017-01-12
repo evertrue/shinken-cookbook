@@ -24,6 +24,12 @@ template '/etc/shinken/brokers/broker-master.cfg' do
   notifies :restart, 'service[shinken]'
 end
 
+directory "#{node['shinken']['home']}/var/rw" do
+  recursive true
+  owner node['shinken']['user']
+  group node['shinken']['group']
+end
+
 %w(
   logstore-sqlite
 ).each do |mod|
