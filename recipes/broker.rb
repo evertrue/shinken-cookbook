@@ -23,3 +23,32 @@ template '/etc/shinken/brokers/broker-master.cfg' do
   group  'shinken'
   notifies :restart, 'service[shinken]'
 end
+
+directory "#{node['shinken']['home']}/var" do
+  owner 'shinken'
+  group 'shinken'
+end
+
+directory "#{node['shinken']['home']}/var/rw" do
+  owner 'shinken'
+  group 'shinken'
+end
+
+%w(
+  logstore-sqlite
+).each do |mod|
+  execute "install-#{mod}" do
+    command "/usr/bin/shinken install #{mod}"
+    user node['shinken']['user']
+    environment('HOME' => node['shinken']['home'])
+    creates "#{node['shinken']['home']}/modules/#{mod}"
+    action  :run
+    notifies :restart, 'service[shinken]'
+  end
+end
+
+template '/etc/shinken/modules/livestatus.cfg' do
+  owner 'shinken'
+  group 'shinken'
+  notifies :restart, 'service[shinken]'
+end

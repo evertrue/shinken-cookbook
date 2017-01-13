@@ -50,6 +50,7 @@ end
 %w(
   auth-cfg-password
   sqlitedb
+  livestatus
 ).each do |mod|
   execute "install-#{mod}" do
     command "/usr/bin/shinken install #{mod}"
