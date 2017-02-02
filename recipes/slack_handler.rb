@@ -18,7 +18,13 @@
 #
 
 file '/etc/shinken/slack_webhook' do
-  content data_bag_item('secrets', 'api_keys')['slack']['shinken']
+  content(
+    if node['slack'] && node['slack']['shinken']
+      data_bag_item('secrets', 'api_keys')['slack']['shinken']
+    else
+      data_bag_item('secrets', 'api_keys')['slack_webhook_url']
+    end
+  )
   owner  'shinken'
   group  'shinken'
   mode 0600
