@@ -32,6 +32,7 @@ package 'ruby2.2-dev'
   check_elasticsearch
   check_inodes_snmp
   check_mesos_resource
+  check_zookeeper_admin
 ).each do |plugin|
   cookbook_file "#{node['shinken']['nagios_home']}/plugins/#{plugin}" do
     source "plugins/#{plugin}"

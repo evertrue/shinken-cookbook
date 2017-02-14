@@ -62,6 +62,18 @@ default['shinken']['commands'] = {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_mesos_resource ' \
       '-I $HOSTADDRESS$ -m mem -t $ARG1$'
   },
+  'check_zookeeper_node_count' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_zookeeper_admin ' \
+      '-I $HOSTADDRESS$ -c stat'
+  },
+  'check_zookeeper_ok' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_zookeeper_admin ' \
+      '-I $HOSTADDRESS$ -c ruok'
+  },
+  'check_zookeeper_rw' => {
+    'command_line' => '$NAGIOSPLUGINSDIR$/check_zookeeper_admin ' \
+      '-I $HOSTADDRESS$ -c isro'
+  },
   'check_reboot_required' => {
     'command_line' => '$NAGIOSPLUGINSDIR$/check_by_ssh ' \
       '--hostname=$HOSTADDRESS$ ' \

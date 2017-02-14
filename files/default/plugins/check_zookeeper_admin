@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'trollop'
+require 'byebug'
+
+class UnknownResponseError < StandardError; end
+
+class CheckZookeeperAdmin
+  NODE_COUNT_LIMIT = 3_500_000
+
+  def self.run
+    CheckZookeeperAdmin.new.run
+  end
+
+  def run
+    case opts[:command]
+    when 'ruok'
+      check_ruok
+    when 'isro'
+      check_readonly
+    when 'stat'
+      check_stat
+    end
+
+    socket.close
+  rescue => e
+    puts "Error connecting to Zookeeper host: #{e.message}"
+    exit 3
+  end
+
+  private
+
+  def check_ruok
+    socket.write opts[:command] + "\n"
+    result = read
+
+    fail UnknownResponseError, "Unrecognized response: #{result}" unless result == 'imok'
+    puts 'NODE OK'
+    exit 0
+  rescue => e
+    puts "NODE CRITICAL - #{e.class}: #{e.message}"
+    exit 2
+  end
+
+  def check_readonly
+    socket.write opts[:command] + "\n"
+    result = read
+
+    if result == 'rw'
+      puts 'RW OK - Node is in read-write mode'
+      exit 0
+    elsif result == 'ro'
+      puts 'RW CRITICAL - Node is in read-only mode'
+      exit 2
+    end
+
+    fail UnknownResponseError, "Unrecognized response: #{result}"
+  end
+
+  def check_stat
+    socket.write opts[:command] + "\n"
+    result = read
+
+    node_count = result.split("\n").grep(/^Node count:/).first.split(': ').last.to_i
+
+    if node_count > NODE_COUNT_LIMIT
+      puts "NODE COUNT CRITICAL - Node Count: #{node_count}"
+      puts result.split("\n").grep(/: /).join("\n")
+      exit 2
+    else
+      puts "NODE COUNT OK - Node Count: #{node_count}"
+      puts result.split("\n").grep(/: /).join("\n")
+      exit 0
+    end
+  end
+
+  def socket
+    return @socket unless !@socket || @socket.closed?
+    @socket = TCPSocket.open opts[:host], opts[:port]
+  end
+
+  def read
+    msg = ''
+
+    loop do
+      begin
+        msg += socket.recv 1024
+      rescue Errno::ECONNRESET
+        return msg
+      end
+    end
+  end
+
+  def opts
+    @opts ||= Trollop.options do
+      opt :host, 'Zookeeper host', short: 'I', type: String
+      opt :port, 'Zookeeper port', short: 'p', default: 2181
+      opt :command, 'Command to send', short: 'c', type: String
+    end
+  end
+end
+
+CheckZookeeperAdmin.run
