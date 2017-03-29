@@ -9,5 +9,6 @@ default['shinken']['webui'] = {
   'modules' => %w(
     auth-cfg-password
     SQLitedb
+    mongo-logs
   )
 }
