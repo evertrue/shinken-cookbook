@@ -38,9 +38,9 @@ class SlackNotificationHandler
 
   def slack
     @slack ||= begin
-      sl = Slack::Notifier.new ENV['SLACK_WEBHOOK'] || File.read('/etc/shinken/slack_webhook').chomp
-      sl.channel = opts[:channel]
-      sl.username = 'Shinken Notifier'
+      sl = Slack::Notifier.new ENV['SLACK_WEBHOOK'] || File.read('/etc/shinken/slack_webhook').chomp, 
+        channel: opts[:channel], 
+        username: 'Shinken Notifier'
       sl
     end
   end
