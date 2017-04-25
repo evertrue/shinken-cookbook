@@ -28,7 +28,7 @@ default['shinken']['commands'] = {
                       "--logname #{node['shinken']['agent_user']} " \
                       "--command='[ $$(" \
                       "sudo find /proc -ignore_readdir_race -path \"/proc/*/fd/*\" -not -path " \
-                      "\"/proc/self/*\" -mmin +720 -ls | grep \'(deleted)\' | wc -l" \
+                      "\"/proc/self/*\" -mmin +720 -ls | grep \"'\\(deleted\\)'\" | wc -l" \
                       ") -le $ARG1$ ]' " \
                       '-o StrictHostKeyChecking=no ' \
                       "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
