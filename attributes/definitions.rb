@@ -26,7 +26,10 @@ default['shinken']['commands'] = {
                       '--timeout 120 ' \
                       '-H $HOSTADDRESS$ ' \
                       "--logname #{node['shinken']['agent_user']} " \
-                      "--command='[ $$(sudo lsof -nP +L1 | wc -l) -le $ARG1$ ]' " \
+                      "--command='[ $$(" \
+                      "sudo find /proc/*/fd -not -path '/proc/self/*' -mmin +720 -ls | grep " \
+                      "'(deleted)' | wc -l" \
+                      ") -le $ARG1$ ]' " \
                       '-o StrictHostKeyChecking=no ' \
                       "--identity=#{node['shinken']['home']}/.ssh/id_rsa"
   },
