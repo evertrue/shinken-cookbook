@@ -1,7 +1,6 @@
 ---
 driver:
   name: ec2
-  require_chef_omnibus: 12.14.60
   aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
   region: us-east-1
   availability_zone: us-east-1b
@@ -19,6 +18,8 @@ transport:
 
 provisioner:
   name: chef_zero
+  product_name: chef
+  product_version: 12
   client_rb:
     environment: test
   encrypted_data_bag_secret_key_path: test/integration/encrypted_data_bag_secret
