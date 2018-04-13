@@ -30,7 +30,6 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[ec2ohaihints::default]
       - recipe[et_hostname::default]
       - recipe[test-tools::default]
       - recipe[mock-ec2::default]
