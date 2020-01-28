@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'trollop'
+require 'optimist'
 require 'pagerduty'
 
 class PagerDutyNotificationHandler
@@ -32,7 +32,7 @@ class PagerDutyNotificationHandler
   end
 
   def opts
-    @opts ||= Trollop.options do
+    @opts ||= Optimist.options do
       opt :description, 'Service Description', short: 'n', type: :string, required: true
       opt :state,       'Service State',       short: 's', type: :string, required: true
       opt :env,         'Environment',         short: 'e', type: :string, required: true

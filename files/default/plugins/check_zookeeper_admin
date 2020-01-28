@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'socket'
-require 'trollop'
+require 'optimist'
 require 'byebug'
 
 class UnknownResponseError < StandardError; end
@@ -93,7 +93,7 @@ class CheckZookeeperAdmin
   end
 
   def opts
-    @opts ||= Trollop.options do
+    @opts ||= Optimist.options do
       opt :host, 'Zookeeper host', short: 'I', type: String
       opt :port, 'Zookeeper port', short: 'p', default: 2181
       opt :command, 'Command to send', short: 'c', type: String

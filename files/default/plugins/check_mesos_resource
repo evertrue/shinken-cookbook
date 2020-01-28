@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'unirest'
-require 'trollop'
+require 'optimist'
 
 module ShinkenPlugins
   class CheckMesosResource
@@ -36,7 +36,7 @@ module ShinkenPlugins
     end
 
     def opts
-      @opts ||= Trollop.options do
+      @opts ||= Optimist.options do
         opt :hostname,
             'Mesos host to check',
             short: '-I',

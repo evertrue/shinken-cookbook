@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'snmp'
-require 'trollop'
+require 'optimist'
 
 class CriticalStateException < StandardError; end
 
@@ -32,7 +32,7 @@ class CheckInodesSnmp
   end
 
   def opts
-    @opts ||= Trollop.options do
+    @opts ||= Optimist.options do
       opt :hostname,
           'Host to check',
           short: '-I',

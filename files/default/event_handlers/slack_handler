@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'trollop'
+require 'optimist'
 require 'slack-notifier'
 
 class SlackNotificationHandler
@@ -46,7 +46,7 @@ class SlackNotificationHandler
   end
 
   def opts
-    @opts ||= Trollop.options do
+    @opts ||= Optimist.options do
       opt :channel,     'Slack Channel',       short: 'c', type: :string, required: true
       opt :description, 'Service Description', short: 'd', type: :string, required: true
       opt :state,       'Service State',       short: 's', type: :string, required: true

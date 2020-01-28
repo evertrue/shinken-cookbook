@@ -22,6 +22,7 @@ package 'ruby2.2-dev'
 %w(
   unirest
   trollop
+  optimist
   snmp
   cassandra-driver
 ).each { |gem_name| gem_package gem_name }

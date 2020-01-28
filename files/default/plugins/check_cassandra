@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'trollop'
+require 'optimist'
 require 'cassandra'
 require 'resolv'
 
@@ -22,7 +22,7 @@ class CheckCassandra
   end
 
   def opts
-    @opts ||= Trollop.options do
+    @opts ||= Optimist.options do
       opt :hostname,
           'Host to check',
           short: '-I',

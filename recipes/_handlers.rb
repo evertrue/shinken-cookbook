@@ -19,6 +19,7 @@
 
 package 'ruby2.2'
 gem_package 'trollop'
+gem_package 'optimist'
 
 directory '/etc/shinken/notification-handlers' do
   owner  'shinken'
