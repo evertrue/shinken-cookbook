@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.3.5
+
+* Adding retry logic the cassandra health check, switched to optimist gem
+
 ## 2.0.3
 
 * Ensure that /var/run/shinken is owned by shinken/shinken
