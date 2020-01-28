@@ -8,7 +8,17 @@ class CriticalStateException < StandardError; end
 
 class CheckCassandra
   def self.check_node!
-    raise CriticalStateException unless CheckCassandra.new.status == :up
+    attempts = 0
+
+    begin
+      raise CriticalStateException unless CheckCassandra.new.status == :up
+    rescue CriticalStateException => e
+      raise e if attempts >= 3
+
+      attempts += 1
+      sleep 10
+      retry
+    end
   end
 
   def status
