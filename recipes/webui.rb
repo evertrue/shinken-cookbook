@@ -26,11 +26,11 @@ ark 'mod-webui2' do
   only_if { node['shinken']['install_type'] == 'source' }
 end
 
-python_pip 'bottle' do
+python_package 'bottle' do
   version '0.12.8'
 end
 
-python_pip 'pymongo'
+python_package 'pymongo'
 package 'mongodb'
 
 execute 'install-webui2' do

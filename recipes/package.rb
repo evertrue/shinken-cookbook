@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-python_pip 'shinken'
+python_package 'shinken'

@@ -27,7 +27,7 @@ user 'shinken' do
 end
 
 include_recipe 'apt' if node['platform_family'] == 'debian'
-include_recipe 'python'
+include_recipe 'poise-python'
 
 package 'libcurl4-openssl-dev'
 include_recipe 'shinken::plugins'
