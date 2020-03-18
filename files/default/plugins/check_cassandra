@@ -53,7 +53,7 @@ rescue Interrupt
   puts 'Interrupt'
   exit 3
 rescue Exception => e
-  puts "Error: #{e.message}"
+  puts "Error: #{e.class}/#{e.message}"
   puts e.backtrace.join("\n")
   exit 3
 end
