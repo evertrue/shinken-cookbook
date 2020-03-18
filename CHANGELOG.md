@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.3.7
+
+* output the name of the exception in the cassandra check
+
 ## 2.3.6
 
 * switching to poise-python
