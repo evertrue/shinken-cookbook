@@ -4,7 +4,7 @@ maintainer_email 'devops@evertrue.com'
 license          'Apache 2.0'
 description      'Installs/Configures shinken'
 long_description 'Installs/Configures shinken'
-version          '2.3.7'
+version          '2.3.8'
 
 depends 'ark'
 depends 'apt'

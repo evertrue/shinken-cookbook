@@ -52,6 +52,9 @@ rescue CriticalStateException => e
 rescue Interrupt
   puts 'Interrupt'
   exit 3
+rescue SystemExit
+  # silence DNS failures
+  puts 'CASSANDRA NODE NOT SPECIFIED'
 rescue Exception => e
   puts "Error: #{e.class}/#{e.message}"
   puts e.backtrace.join("\n")
