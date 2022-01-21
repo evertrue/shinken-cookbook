@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.4.0
+
+* removing poise-python and installing python packages using apt
+
 ## 2.3.7
 
 * output the name of the exception in the cassandra check

@@ -19,7 +19,7 @@
 
 include_recipe "shinken::#{node['shinken']['install_type']}"
 
-python_package 'pycurl'
+package 'python-pycurl'
 
 # For better performance for the Shinken daemons' communication
-python_package 'cherrypy'
+package 'pycurl-cherrypy'
