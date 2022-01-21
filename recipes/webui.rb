@@ -26,10 +26,7 @@ ark 'mod-webui2' do
   only_if { node['shinken']['install_type'] == 'source' }
 end
 
-package 'python-bottle' do
-  version '0.12.8'
-end
-
+package 'python-bottle'
 package 'python-pymongo'
 package 'mongodb'
 

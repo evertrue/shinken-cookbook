@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.4.2
+## 2.4.3
 
 * removing poise-python and installing python packages using apt
 
